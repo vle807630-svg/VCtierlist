@@ -69,12 +69,20 @@
         .badge-tier {
             font-size: 0.68rem; font-weight: 800; padding: 4px 10px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px;
             text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.5px;
+            border-width: 1px; border-style: solid;
         }
-        .tier-ht1 { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
-        .tier-lt1 { background: rgba(249, 115, 22, 0.18); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); }
-        .tier-ht2 { background: rgba(234, 179, 8, 0.18); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4); }
-        .tier-lt2 { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
-        .tier-ht3 { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+        /* Phân màu viền và nền riêng biệt cho từng Tier */
+        .tier-ht1 { background: rgba(239, 68, 68, 0.18); color: #f87171; border-color: rgba(239, 68, 68, 0.6); }
+        .tier-lt1 { background: rgba(249, 115, 22, 0.18); color: #fb923c; border-color: rgba(249, 115, 22, 0.6); }
+        .tier-ht2 { background: rgba(234, 179, 8, 0.18); color: #facc15; border-color: rgba(234, 179, 8, 0.6); }
+        .tier-lt2 { background: rgba(16, 185, 129, 0.18); color: #34d399; border-color: rgba(16, 185, 129, 0.6); }
+        .tier-ht3 { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border-color: rgba(59, 130, 246, 0.6); }
+        .tier-lt3 { background: rgba(168, 85, 247, 0.18); color: #c084fc; border-color: rgba(168, 85, 247, 0.6); }
+        .tier-ht4 { background: rgba(236, 72, 153, 0.18); color: #f472b6; border-color: rgba(236, 72, 153, 0.6); }
+        .tier-lt4 { background: rgba(14, 165, 233, 0.18); color: #38bdf8; border-color: rgba(14, 165, 233, 0.6); }
+        .tier-ht5 { background: rgba(100, 116, 139, 0.18); color: #94a3b8; border-color: rgba(100, 116, 139, 0.6); }
+        .tier-lt5 { background: rgba(71, 85, 105, 0.18); color: #64748b; border-color: rgba(71, 85, 105, 0.6); }
+
         .region-badge { font-size: 0.65rem; font-weight: 800; padding: 3px 8px; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; }
         .region-vn { background: rgba(220, 38, 38, 0.2); color: #fca5a5; border: 1px solid rgba(220, 38, 38, 0.4); }
         .rank-num { font-style: italic; font-weight: 900; font-size: 1.5rem; font-family: 'Space Grotesk', sans-serif; }
@@ -142,7 +150,7 @@
                     HỆ THỐNG XẾP HẠNG <br><span class="text-glow-orange">VC TIERS</span> VUAMC.NET
                 </h1>
                 <p class="text-sm md:text-base text-gray-400 max-w-xl leading-relaxed">
-                    Đấu trường đánh giá năng lực Cobblemon PvP chuẩn xác, minh bạch dành riêng cho cộng đồng người chơi tại <span class="text-amber-400 font-bold font-subheading">vuamc.net</span>. Khẳng định trình độ và chinh phục đỉnh cao!
+                    Đấu trường đánh giá năng lực Cobblemon PvP chuẩn xác, minh bạch dành riêng cho cộng đồng người chơi tại <span class="text-amber-400 font-bold font-subheading">vuamc.net</span>[cite: 7]. Khẳng định trình độ và chinh phục đỉnh cao!
                 </p>
                 <div class="flex flex-wrap items-center gap-3 pt-2">
                     <a href="#rankings" class="btn-orange-glow px-6 py-3.5 rounded-xl text-slate-950 font-black text-xs flex items-center gap-2 font-subheading uppercase">
@@ -259,12 +267,10 @@
                     <input type="text" id="searchInput" oninput="renderTable()" placeholder="Tìm tên tuyển thủ..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
                 </div>
 
-                <!-- Admin / Tester Controls (Chỉ hiện khi tài khoản đăng nhập là Admin hoặc Tester) -->
-                <div id="adminControls" class="hidden min-w-max flex items-center gap-2">
-                    <button onclick="openPlayerModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-600/25 flex items-center gap-1.5 font-subheading cursor-pointer">
+                <div id="adminControls" class="flex min-w-max items-center gap-2">
+                    <button type="button" id="addPlayerBtn" onclick="openPlayerModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-600/25 flex items-center gap-1.5 font-subheading cursor-pointer">
                         <i class="fa-solid fa-user-plus"></i> Thêm Player
                     </button>
-                    <!-- Nút phân quyền chỉ dành riêng cho Admin (qthangql) -->
                     <button id="manageRolesBtn" onclick="openRoleManagerModal()" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs px-3.5 py-2.5 rounded-xl shadow-lg flex items-center gap-1.5 font-subheading cursor-pointer">
                         <i class="fa-solid fa-user-shield"></i> Phân Quyền
                     </button>
@@ -350,7 +356,7 @@
         </div>
     </div>
 
-    <!-- Role Manager Modal (Admin Thăng Cấp Tester) -->
+    <!-- Role Manager Modal -->
     <div id="roleManagerModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-[115] flex items-center justify-center p-4">
         <div class="glass-panel border border-cyber-border w-full max-w-xl rounded-3xl p-6 shadow-2xl relative">
             <button onclick="closeRoleManagerModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
@@ -426,45 +432,45 @@
                     <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
                         <span class="text-xs font-bold text-red-400 block mb-2">Đội hình 1vs1:</span>
                         <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
-                            <input type="text" id="poke_1v1_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_1v1_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_1v1_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_1v1_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_1v1_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_1v1_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1vs1_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1vs1_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1vs1_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1vs1_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1vs1_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1vs1_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
                         </div>
                     </div>
                     <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
                         <span class="text-xs font-bold text-amber-400 block mb-2">Đội hình 2vs2:</span>
                         <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
-                            <input type="text" id="poke_2v2_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_2v2_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_2v2_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_2v2_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_2v2_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_2v2_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2vs2_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2vs2_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2vs2_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2vs2_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2vs2_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2vs2_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
                         </div>
                     </div>
                     <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
                         <span class="text-xs font-bold text-emerald-400 block mb-2">Đội hình 3vs3:</span>
                         <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
-                            <input type="text" id="poke_3v3_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_3v3_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_3v3_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_3v3_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_3v3_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_3v3_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3vs3_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3vs3_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3vs3_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3vs3_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3vs3_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3vs3_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
                         </div>
                     </div>
                     <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
                         <span class="text-xs font-bold text-blue-400 block mb-2">Đội hình 4vs4:</span>
                         <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
-                            <input type="text" id="poke_4v4_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_4v4_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_4v4_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_4v4_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_4v4_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
-                            <input type="text" id="poke_4v4_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4vs4_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4vs4_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4vs4_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4vs4_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4vs4_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4vs4_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
                         </div>
                     </div>
                 </div>
@@ -489,7 +495,6 @@
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
 
-        // HỆ THỐNG USERS & AUTH & ROLES (ĐÃ THIẾT LẬP SẴN ADMIN GỐC qthangql)
         let currentUser = JSON.parse(localStorage.getItem('vctiers_current_user')) || null;
         let usersList = JSON.parse(localStorage.getItem('vctiers_users_db')) || [
             { username: 'qthangql', password: 'Dung12345D', role: 'admin' }
@@ -576,10 +581,9 @@
             }
         ];
 
-        let players = JSON.parse(localStorage.getItem('vctiers_players_v20')) || defaultPlayers;
-        function saveToLocalStorage() { localStorage.setItem('vctiers_players_v20', JSON.stringify(players)); }
+        let players = JSON.parse(localStorage.getItem('vctiers_players_v22')) || defaultPlayers;
+        function saveToLocalStorage() { localStorage.setItem('vctiers_players_v22', JSON.stringify(players)); }
 
-        // AUTH & MODAL FUNCTIONS
         function openAuthModal(tab) {
             switchAuthTab(tab);
             document.getElementById('authModal').classList.remove('hidden');
@@ -640,6 +644,7 @@
         function updateUIAuth() {
             const area = document.getElementById('authNavArea');
             const adminControls = document.getElementById('adminControls');
+            const addPlayerBtn = document.getElementById('addPlayerBtn');
             const manageRolesBtn = document.getElementById('manageRolesBtn');
 
             if(currentUser) {
@@ -651,8 +656,17 @@
                         <button onclick="logout()" class="text-red-400 hover:text-red-300 text-xs ml-2 cursor-pointer" title="Đăng xuất"><i class="fa-solid fa-power-off"></i></button>
                     </div>
                 `;
-                const canManage = (currentUser.role === 'admin' || currentUser.role === 'tester');
-                adminControls.classList.toggle('hidden', !canManage);
+
+                // Kiểm tra phân quyền: Member không được thấy nút Thêm/Sửa/Xóa Player
+                if (currentUser.role === 'member') {
+                    adminControls.classList.add('hidden');
+                } else {
+                    adminControls.classList.remove('hidden');
+                    // Chỉ hiển thị nút Thêm Player cho Admin hoặc Tester
+                    addPlayerBtn.classList.remove('hidden');
+                }
+
+                // Chỉ Admin mới thấy nút phân quyền hệ thống
                 manageRolesBtn.classList.toggle('hidden', currentUser.role !== 'admin');
             } else {
                 area.innerHTML = `
@@ -665,7 +679,6 @@
             }
         }
 
-        // ROLE MANAGER (Admin qthangql thăng cấp Tester)
         function openRoleManagerModal() {
             const container = document.getElementById('roleListContainer');
             container.innerHTML = '';
@@ -749,8 +762,16 @@
                     return `<span class="badge-tier tier-${t.rank.toLowerCase()}"><i class="${modeObj.icon} ${modeObj.color}"></i> ${t.rank}${teammateBadge}</span>`;
                 }).join(' ');
 
-                // Chỉ hiển thị nút chỉnh sửa nếu đã đăng nhập tài khoản Admin hoặc Tester
-                const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.role === 'tester');
+                // Chỉ hiển thị nút chỉnh sửa/xóa nếu là Admin hoặc Tester
+                let actionButtonsHTML = '';
+                if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'tester')) {
+                    actionButtonsHTML = `
+                        <div class="flex items-center gap-1 border-l border-cyber-border pl-2">
+                            <button type="button" onclick="openPlayerModal('${player.id}')" class="text-amber-400 text-xs p-1.5 rounded-lg bg-amber-500/10 cursor-pointer" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button" onclick="deletePlayer('${player.id}')" class="text-red-400 text-xs p-1.5 rounded-lg bg-red-500/10 cursor-pointer" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                }
 
                 const card = document.createElement('div');
                 card.className = `glass-panel glass-card-interactive rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer`;
@@ -771,11 +792,7 @@
                         <div class="flex items-center gap-1.5 flex-wrap">${tiersPillsHTML}</div>
                         <div class="flex items-center gap-3">
                             <span class="region-badge region-vn">${player.region}</span>
-                            ${canEdit ? `
-                            <div class="flex items-center gap-1 border-l border-cyber-border pl-2">
-                                <button type="button" onclick="openPlayerModal('${player.id}')" class="text-amber-400 text-xs p-1.5 rounded-lg bg-amber-500/10 cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
-                                ${currentUser.role === 'admin' ? `<button type="button" onclick="deletePlayer('${player.id}')" class="text-red-400 text-xs p-1.5 rounded-lg bg-red-500/10 cursor-pointer"><i class="fa-solid fa-trash"></i></button>` : ''}
-                            </div>` : ''}
+                            ${actionButtonsHTML}
                         </div>
                     </div>
                 `;
@@ -834,6 +851,12 @@
         function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); }
 
         function openPlayerModal(playerId = null) {
+            // Kiểm tra bảo mật tầng giao diện: Nếu chưa đăng nhập hoặc là member thì không cho mở modal thao tác
+            if (!currentUser || currentUser.role === 'member') {
+                alert("Bạn không có quyền thực hiện thao tác này! Chỉ Tester hoặc Admin mới được cấp phép.");
+                return;
+            }
+
             document.getElementById('editingPlayerId').value = playerId || '';
             if (playerId) {
                 const p = players.find(x => x.id === playerId);
@@ -845,18 +868,28 @@
                         const sel = document.getElementById(`tier_${t.mode}`);
                         if(sel) sel.value = t.rank;
                     });
-                    ['1v1', '2v2', '3v3', '4v4'].forEach(mKey => {
-                        const modeFull = mKey === '1v1' ? '1vs1' : mKey === '2v2' ? '2vs2' : mKey === '3v3' ? '3vs3' : '4vs4';
-                        const list = (p.teams || {})[modeFull] || [];
-                        for(let i=0; i<6; i++) document.getElementById(`poke_${mKey}_${i}`).value = list[i] || '';
+                    ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(mKey => {
+                        const list = (p.teams || {})[mKey] || [];
+                        for(let i=0; i<6; i++) {
+                            const field = document.getElementById(`poke_${mKey}_${i}`);
+                            if(field) field.value = list[i] || '';
+                        }
                     });
                     calculateAutoPointsAndRank();
                 }
             } else {
                 document.getElementById('playerFormName').value = '';
                 document.getElementById('playerFormTeammate4v4').value = '';
-                ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => { document.getElementById(`tier_${m}`).value = ""; });
-                ['1v1', '2v2', '3v3', '4vs4'].forEach(mKey => { for(let i=0; i<6; i++) document.getElementById(`poke_${mKey}_${i}`).value = ''; });
+                ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => { 
+                    const sel = document.getElementById(`tier_${m}`);
+                    if(sel) sel.value = ""; 
+                });
+                ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(mKey => { 
+                    for(let i=0; i<6; i++) {
+                        const field = document.getElementById(`poke_${mKey}_${i}`);
+                        if(field) field.value = '';
+                    }
+                });
                 calculateAutoPointsAndRank();
             }
             document.getElementById('playerModal').classList.remove('hidden');
@@ -865,6 +898,11 @@
         function closePlayerModal() { document.getElementById('playerModal').classList.add('hidden'); }
 
         function savePlayer() {
+            if (!currentUser || currentUser.role === 'member') {
+                alert("Bạn không có quyền lưu thay đổi!");
+                return;
+            }
+
             const id = document.getElementById('editingPlayerId').value;
             const name = document.getElementById('playerFormName').value.trim();
             if (!name) { alert("Vui lòng nhập tên Ingame Minecraft!"); return; }
@@ -872,20 +910,19 @@
             const title = document.getElementById('playerFormTitle').value;
             const teammate4v4 = document.getElementById('playerFormTeammate4v4').value.trim();
             const teams = {};
-            ['1v1', '2v2', '3v3', '4v4'].forEach(mKey => {
-                const modeFull = mKey === '1v1' ? '1vs1' : mKey === '2v2' ? '2vs2' : mKey === '3v3' ? '3vs3' : '4vs4';
+            ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(mKey => {
                 const pList = [];
                 for(let i=0; i<6; i++) {
-                    const val = document.getElementById(`poke_${mKey}_${i}`).value.trim();
-                    if(val) pList.push(val);
+                    const field = document.getElementById(`poke_${mKey}_${i}`);
+                    if(field && field.value.trim()) pList.push(field.value.trim());
                 }
-                teams[modeFull] = pList;
+                teams[mKey] = pList;
             });
 
             const tiers = [];
             ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => {
-                const val = document.getElementById(`tier_${m}`).value;
-                if(val) tiers.push({ mode: m, rank: val });
+                const sel = document.getElementById(`tier_${m}`);
+                if(sel && sel.value) tiers.push({ mode: m, rank: sel.value });
             });
 
             let points = 0;
@@ -904,6 +941,10 @@
         }
 
         function deletePlayer(id) {
+            if (!currentUser || currentUser.role === 'member') {
+                alert("Bạn không có quyền xóa!");
+                return;
+            }
             if (confirm("Xóa tuyển thủ này?")) {
                 players = players.filter(p => p.id !== id);
                 saveToLocalStorage();
