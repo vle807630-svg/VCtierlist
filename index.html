@@ -245,9 +245,31 @@
                     <i class="fa-regular fa-copy text-xs text-gray-400 group-hover:text-amber-400 transition-colors"></i>
                 </button>
 
-                <button id="adminLoginBtn" onclick="handleAdminBtnClick()" class="bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-black text-xs px-4 py-2 rounded-xl transition-all duration-200 hover:-translate-y-0.5 flex items-center gap-1.5 font-subheading shadow-lg shadow-amber-500/25 cursor-pointer">
-                    <i id="adminBtnIcon" class="fa-solid fa-key"></i> <span id="adminBtnText">Admin</span>
-                </button>
+                <!-- Nút đăng ký tài khoản Tester / Đăng nhập -->
+                <div id="authContainer" class="flex items-center gap-2">
+                    <button onclick="openAuthModal('register')" class="bg-white/10 hover:bg-white/15 active:scale-95 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition-all duration-200 flex items-center gap-1.5 font-subheading border border-cyber-border cursor-pointer">
+                        <i class="fa-solid fa-user-plus text-amber-400"></i> Tạo Tài Khoản
+                    </button>
+                    <button onclick="openAuthModal('login')" class="bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl transition-all duration-200 flex items-center gap-1.5 font-subheading shadow-lg shadow-amber-500/25 cursor-pointer">
+                        <i class="fa-solid fa-right-to-bracket"></i> Đăng Nhập
+                    </button>
+                </div>
+
+                <!-- Khu vực hiển thị khi đã đăng nhập -->
+                <div id="userProfileBadge" class="hidden items-center gap-3 bg-cyber-card border border-cyber-border px-3 py-1.5 rounded-xl">
+                    <div class="flex items-center gap-2">
+                        <div class="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xs font-bold">
+                            <i id="userRoleIcon" class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div class="flex flex-col text-left">
+                            <span id="currentUsernameDisplay" class="text-xs font-bold text-white font-subheading leading-none">Tester</span>
+                            <span id="currentUserRoleDisplay" class="text-[9px] text-amber-400 uppercase tracking-wider font-bold">Tester</span>
+                        </div>
+                    </div>
+                    <button onclick="handleLogout()" class="text-gray-400 hover:text-red-400 text-xs p-1 transition-colors cursor-pointer" title="Đăng xuất">
+                        <i class="fa-solid fa-power-off"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -268,7 +290,7 @@
                 </h1>
 
                 <p class="text-sm md:text-base text-gray-400 max-w-xl leading-relaxed">
-                    Đấu trường đánh giá năng lực Cobblemon PvP chuẩn xác, minh bạch dành riêng cho cộng đồng người chơi tại <span class="text-amber-400 font-bold font-subheading">vuamc.net</span>. Khẳng định trình độ và chinh phục đỉnh cao![cite: 5]
+                    Đấu trường đánh giá năng lực Cobblemon PvP chuẩn xác, minh bạch dành riêng cho cộng đồng người chơi tại <span class="text-amber-400 font-bold font-subheading">vuamc.net</span>. Khẳng định trình độ và chinh phục đỉnh cao!
                 </p>
 
                 <div class="flex flex-wrap items-center gap-3 pt-2">
@@ -396,6 +418,7 @@
                     <input type="text" id="searchInput" oninput="renderTable()" placeholder="Tìm tên tuyển thủ..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
                 </div>
 
+                <!-- Nút Thêm Player chỉ hiện cho Tester/Admin đã đăng nhập -->
                 <div id="adminControls" class="hidden min-w-max">
                     <button onclick="openPlayerModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-600/25 flex items-center gap-1.5 font-subheading cursor-pointer">
                         <i class="fa-solid fa-user-plus"></i> Thêm Player
@@ -444,23 +467,44 @@
         </div>
     </div>
 
-    <!-- Admin Auth Modal -->
-    <div id="adminModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <!-- Auth Modal (Tạo tài khoản / Đăng nhập) -->
+    <div id="authModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="glass-panel border border-cyber-border w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
-            <h3 class="text-xl font-bold text-white mb-1 font-subheading"><i class="fa-solid fa-lock text-amber-400 mr-2"></i>Xác thực Admin</h3>
-            <input type="password" id="adminPasswordInput" onkeyup="if(event.key==='Enter') loginAdmin()" placeholder="Nhập mật khẩu Admin..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white mb-4 focus:outline-none focus:border-amber-400 text-sm">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="authModalTitle" class="text-xl font-bold text-white mb-4 font-subheading flex items-center gap-2"><i class="fa-solid fa-user-shield text-amber-400"></i> Đăng Nhập Hệ Thống</h3>
+            
+            <div class="space-y-3 mb-5">
+                <!-- Chỉ hiển thị chọn vai trò nếu tài khoản hiện tại là Admin hoặc đang tạo tài khoản Tester mặc định ẩn/khóa -->
+                <div id="regRoleGroup" class="hidden">
+                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Chọn Vai Trò Tài Khoản:</label>
+                    <select id="authRegRole" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
+                        <option value="tester">Tester (Chỉnh sửa & Cập nhật Tier)</option>
+                        <option value="admin">Quản Trị Viên (Toàn quyền)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tên Tài Khoản:</label>
+                    <input type="text" id="authUsername" placeholder="Nhập tên tài khoản..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Mật Khẩu:</label>
+                    <input type="password" id="authPassword" onkeyup="if(event.key==='Enter') processAuth()" placeholder="Nhập mật khẩu..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
+                </div>
+                <p id="authHint" class="text-[11px] text-amber-400/80 italic">Đăng ký mới sẽ tự động nhận quyền Tester để thao tác.</p>
+            </div>
+
             <div class="flex justify-end gap-2 font-subheading">
-                <button onclick="toggleAdminModal()" class="px-4 py-2 rounded-xl bg-white/5 text-gray-300 text-xs font-bold cursor-pointer">Hủy</button>
-                <button onclick="loginAdmin()" class="px-4 py-2 rounded-xl bg-amber-500 text-slate-950 text-xs font-black cursor-pointer shadow-md">Đăng nhập</button>
+                <button onclick="closeAuthModal()" class="px-4 py-2 rounded-xl bg-white/5 text-gray-300 text-xs font-bold cursor-pointer">Hủy</button>
+                <button id="authSubmitBtn" onclick="processAuth()" class="px-5 py-2 rounded-xl bg-amber-500 text-slate-950 text-xs font-black cursor-pointer shadow-md">Xác Nhận</button>
             </div>
         </div>
     </div>
 
-    <!-- Player Form Admin Modal (Fixed Z-Index & Clickability) -->
+    <!-- Player Form Modal -->
     <div id="playerModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-[100] flex items-center justify-center p-4 overflow-y-auto">
         <div class="glass-panel border border-cyber-border w-full max-w-3xl rounded-2xl p-6 shadow-2xl relative my-auto">
             <div class="flex items-center justify-between pb-4 mb-4 border-b border-cyber-border">
-                <h3 id="modalTitle" class="text-xl font-bold text-white font-subheading flex items-center gap-2"><i class="fa-solid fa-user-pen text-emerald-400"></i>Quản Lý Tuyển Thủ</h3>
+                <h3 id="modalTitle" class="text-xl font-bold text-white font-subheading flex items-center gap-2"><i class="fa-solid fa-user-pen text-emerald-400"></i>Quản Lý Tuyển Thủ & Cập Nhật Tier</h3>
                 <button type="button" onclick="closePlayerModal()" class="w-8 h-8 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
             </div>
 
@@ -495,7 +539,7 @@
                 </div>
 
                 <div class="border-t border-cyber-border pt-4">
-                    <label class="text-xs font-black text-amber-400 mb-2 block uppercase font-subheading"><i class="fa-solid fa-layer-group mr-1.5"></i> Thiết Lập Bậc Tier</label>
+                    <label class="text-xs font-black text-amber-400 mb-2 block uppercase font-subheading"><i class="fa-solid fa-layer-group mr-1.5"></i> Thiết Lập Bậc Tier (Tester/Admin)</label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         <div class="flex items-center justify-between bg-cyber-bg p-2.5 rounded-xl border border-cyber-border">
                             <span class="text-xs font-bold text-gray-200">1vs1:</span>
@@ -516,7 +560,6 @@
                     </div>
                 </div>
 
-                <!-- Inputs Đội hình Pokémon -->
                 <div class="border-t border-cyber-border pt-4 space-y-3">
                     <label class="text-xs font-black text-amber-400 block uppercase font-subheading"><i class="fa-solid fa-dragon mr-1.5"></i> Nhập Đội Hình Pokémon (6 con mỗi mode)</label>
                     <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
@@ -585,8 +628,15 @@
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
 
-        let isAdminLoggedIn = localStorage.getItem('isAdmin') === 'true';
-        const ADMIN_PASS = "admin123";
+        let currentUser = JSON.parse(localStorage.getItem('vctiers_current_user')) || null; 
+        
+        let accounts = JSON.parse(localStorage.getItem('vctiers_accounts')) || [
+            { username: 'admin', password: 'admin123', role: 'admin' },
+            { username: 'tester1', password: '123', role: 'tester' }
+        ];
+
+        let authModalMode = 'login'; 
+
         let currentMode = 'overall';
         let currentChampId = '1';
         let activeProfilePlayer = null;
@@ -707,6 +757,8 @@
             filtered.sort((a, b) => b.points - a.points);
             if(filtered.length > 0) updateChampionCard(filtered[0]);
 
+            const canEdit = currentUser !== null; 
+
             filtered.forEach((player, index) => {
                 const rankNum = index + 1;
                 const rankClass = rankNum === 1 ? 'rank-num-1' : rankNum === 2 ? 'rank-num-2' : rankNum === 3 ? 'rank-num-3' : 'text-gray-500';
@@ -737,10 +789,10 @@
                         <div class="flex items-center gap-1.5 flex-wrap">${tiersPillsHTML}</div>
                         <div class="flex items-center gap-3">
                             <span class="region-badge region-vn">${player.region}</span>
-                            ${isAdminLoggedIn ? `
+                            ${canEdit ? `
                             <div class="flex items-center gap-1 border-l border-cyber-border pl-2">
-                                <button type="button" onclick="openPlayerModal('${player.id}')" class="text-amber-400 text-xs p-1.5 rounded-lg bg-amber-500/10 cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button type="button" onclick="deletePlayer('${player.id}')" class="text-red-400 text-xs p-1.5 rounded-lg bg-red-500/10 cursor-pointer"><i class="fa-solid fa-trash"></i></button>
+                                <button type="button" onclick="openPlayerModal('${player.id}')" class="text-amber-400 text-xs p-1.5 rounded-lg bg-amber-500/10 cursor-pointer" title="Chỉnh sửa Tier"><i class="fa-solid fa-pen-to-square"></i></button>
+                                ${currentUser.role === 'admin' ? `<button type="button" onclick="deletePlayer('${player.id}')" class="text-red-400 text-xs p-1.5 rounded-lg bg-red-500/10 cursor-pointer" title="Xóa player"><i class="fa-solid fa-trash"></i></button>` : ''}
                             </div>` : ''}
                         </div>
                     </div>
@@ -798,21 +850,100 @@
         }
 
         function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); }
-        function handleAdminBtnClick() {
-            if (isAdminLoggedIn) {
-                if(confirm("Đăng xuất Admin?")) { isAdminLoggedIn = false; localStorage.setItem('isAdmin', 'false'); updateAdminUI(); renderTable(); }
-            } else { toggleAdminModal(); }
+
+        function openAuthModal(mode) {
+            authModalMode = mode;
+            document.getElementById('authModal').classList.remove('hidden');
+            const titleEl = document.getElementById('authModalTitle');
+            const regGroup = document.getElementById('regRoleGroup');
+            const hintEl = document.getElementById('authHint');
+            
+            if (mode === 'register') {
+                titleEl.innerHTML = '<i class="fa-solid fa-user-plus text-amber-400"></i> Đăng Ký Tài Khoản Tester';
+                
+                // KIỂM TRA BẢO MẬT: Chỉ Admin đang đăng nhập mới có quyền thấy tùy chọn chọn vai trò khi tạo tài khoản mới. 
+                // Nếu khách/member bình thường đăng ký, mặc định quyền luôn là 'tester', ẩn luôn dropdown chọn quyền tránh tự phong Admin.
+                if (currentUser && currentUser.role === 'admin') {
+                    regGroup.classList.remove('hidden');
+                } else {
+                    regGroup.classList.add('hidden');
+                }
+
+                hintEl.innerText = "Tài khoản đăng ký mới mặc định là Tester để hỗ trợ quản lý Tier trận đấu.";
+            } else {
+                titleEl.innerHTML = '<i class="fa-solid fa-right-to-bracket text-amber-400"></i> Đăng Nhập Hệ Thống';
+                regGroup.classList.add('hidden');
+                hintEl.innerText = "Tài khoản mẫu Admin: admin / admin123 (Hoặc tài khoản Tester bạn đã tạo)";
+            }
+            document.getElementById('authUsername').value = '';
+            document.getElementById('authPassword').value = '';
         }
-        function updateAdminUI() {
-            document.getElementById('adminControls').classList.toggle('hidden', !isAdminLoggedIn);
-            document.getElementById('adminBtnText').innerText = isAdminLoggedIn ? "Thoát Admin" : "Admin";
+
+        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
+
+        function processAuth() {
+            const user = document.getElementById('authUsername').value.trim();
+            const pass = document.getElementById('authPassword').value.trim();
+            if (!user || !pass) { alert("Vui lòng điền đầy đủ tên và mật khẩu!"); return; }
+
+            if (authModalMode === 'register') {
+                // Nếu là Admin tạo thì lấy giá trị dropdown chọn vai trò, ngược lại mặc định là 'tester' an toàn tuyệt đối
+                let role = 'tester';
+                const regRoleEl = document.getElementById('authRegRole');
+                if (currentUser && currentUser.role === 'admin' && regRoleEl) {
+                    role = regRoleEl.value;
+                }
+
+                if (accounts.some(acc => acc.username === user)) {
+                    alert("Tên tài khoản này đã tồn tại! Vui lòng chọn tên khác.");
+                    return;
+                }
+                accounts.push({ username: user, password: pass, role: role });
+                localStorage.setItem('vctiers_accounts', JSON.stringify(accounts));
+                alert("Đăng ký tài khoản thành công! Hãy đăng nhập ngay.");
+                openAuthModal('login');
+            } else {
+                const found = accounts.find(acc => acc.username === user && acc.password === pass);
+                if (found) {
+                    currentUser = { username: found.username, role: found.role };
+                    localStorage.setItem('vctiers_current_user', JSON.stringify(currentUser));
+                    closeAuthModal();
+                    updateAuthUI();
+                    renderTable();
+                    alert(`Đăng nhập thành công với quyền: ${found.role.toUpperCase()}`);
+                } else {
+                    alert("Sai tên đăng nhập hoặc mật khẩu!");
+                }
+            }
         }
-        function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); }
-        function loginAdmin() {
-            if (document.getElementById('adminPasswordInput').value === ADMIN_PASS) {
-                isAdminLoggedIn = true; localStorage.setItem('isAdmin', 'true');
-                updateAdminUI(); toggleAdminModal(); renderTable();
-            } else { alert("Sai mật khẩu Admin!"); }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('vctiers_current_user');
+            updateAuthUI();
+            renderTable();
+            alert("Đã đăng xuất tài khoản.");
+        }
+
+        function updateAuthUI() {
+            const authContainer = document.getElementById('authContainer');
+            const userBadge = document.getElementById('userProfileBadge');
+            const adminControls = document.getElementById('adminControls');
+
+            if (currentUser) {
+                authContainer.classList.add('hidden');
+                userBadge.classList.remove('hidden');
+                userBadge.classList.add('flex');
+                document.getElementById('currentUsernameDisplay').innerText = currentUser.username;
+                document.getElementById('currentUserRoleDisplay').innerText = currentUser.role === 'admin' ? 'Quản Trị Viên' : 'Tester';
+                document.getElementById('userRoleIcon').className = currentUser.role === 'admin' ? 'fa-solid fa-crown' : 'fa-solid fa-shield-halved';
+                adminControls.classList.remove('hidden');
+            } else {
+                authContainer.classList.remove('hidden');
+                userBadge.classList.remove('flex');
+                userBadge.classList.add('hidden');
+                adminControls.classList.add('hidden');
+            }
         }
 
         function openPlayerModal(playerId = null) {
@@ -838,7 +969,7 @@
                 document.getElementById('playerFormName').value = '';
                 document.getElementById('playerFormTeammate4v4').value = '';
                 ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => { document.getElementById(`tier_${m}`).value = ""; });
-                ['1v1', '2v2', '3v3', '4v4'].forEach(mKey => { for(let i=0; i<6; i++) document.getElementById(`poke_${mKey}_${i}`).value = ''; });
+                ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(mKey => { for(let i=0; i<6; i++) document.getElementById(`poke_${mKey}_${i}`).value = ''; });
                 calculateAutoPointsAndRank();
             }
             document.getElementById('playerModal').classList.remove('hidden');
@@ -867,7 +998,7 @@
             const tiers = [];
             ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => {
                 const val = document.getElementById(`tier_${m}`).value;
-                if(val) tiers.persh ? null : tiers.push({ mode: m, rank: val });
+                if(val) tiers.push({ mode: m, rank: val });
             });
 
             let points = 0;
@@ -886,6 +1017,10 @@
         }
 
         function deletePlayer(id) {
+            if (currentUser && currentUser.role !== 'admin') {
+                alert("Chỉ có tài khoản Quản Trị Viên (Admin) mới có quyền xóa tuyển thủ!");
+                return;
+            }
             if (confirm("Xóa tuyển thủ này?")) {
                 players = players.filter(p => p.id !== id);
                 saveToLocalStorage();
@@ -896,7 +1031,7 @@
         function copyIP() { navigator.clipboard.writeText("vuamc.net"); alert("Đã copy IP: vuamc.net"); }
 
         populateTierSelects();
-        updateAdminUI();
+        updateAuthUI();
         renderFlowStep();
         renderTable();
     </script>
