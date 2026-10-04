@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VC TIERS - Đấu Trường Xếp Hạng Cobblemon PvP vuamc.net</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#080a0f',
+                            card: 'rgba(13, 17, 26, 0.85)',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            accent: '#f59e0b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        hero: ['Montserrat', 'sans-serif'],
+                        subheading: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #05070a;
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.07) 0%, transparent 50%),
+                radial-gradient(circle at 80% 60%, rgba(99, 102, 241, 0.05) 0%, transparent 45%);
+            background-attachment: fixed;
+            color: #f1f5f9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .text-glow-orange {
+            color: #f97316;
+            text-shadow: 0 0 35px rgba(249, 115, 22, 0.5), 0 0 70px rgba(249, 115, 22, 0.25);
+        }
+
+        .btn-orange-glow {
+            background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.35);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-orange-glow:hover {
+            box-shadow: 0 6px 25px rgba(245, 158, 11, 0.55);
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+        .btn-orange-glow:active {
+            transform: translateY(0px);
+        }
+
+        .btn-green-glow {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34d399;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-green-glow:hover {
+            border-color: rgba(16, 185, 129, 0.7);
+            background: rgba(16, 185, 129, 0.18);
+            box-shadow: 0 4px 18px rgba(16, 185, 129, 0.25);
+            transform: translateY(-2px);
+        }
+        .btn-green-glow:active {
+            transform: translateY(0px);
+        }
+
+        .glass-panel {
+            background: rgba(13, 17, 26, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card-interactive {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card-interactive:hover {
+            transform: translateY(-4px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 15px 30px -10px rgba(245, 158, 11, 0.25);
+        }
+
+        .champion-card {
+            background: linear-gradient(145deg, rgba(245, 158, 11, 0.15) 0%, rgba(13, 17, 26, 0.9) 50%, rgba(99, 102, 241, 0.1) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            box-shadow: 0 0 50px -10px rgba(245, 158, 11, 0.2);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .badge-tier {
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-transform: uppercase;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+
+        .tier-ht1 { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .tier-lt1 { background: rgba(249, 115, 22, 0.18); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); }
+        .tier-ht2 { background: rgba(234, 179, 8, 0.18); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4); }
+        .tier-lt2 { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .tier-ht3 { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+
+        .region-badge {
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .region-vn { background: rgba(220, 38, 38, 0.2); color: #fca5a5; border: 1px solid rgba(220, 38, 38, 0.4); }
+
+        .rank-num {
+            font-style: italic;
+            font-weight: 900;
+            font-size: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .rank-num-1 { color: #f59e0b; text-shadow: 0 0 15px rgba(245, 158, 11, 0.8); }
+        .rank-num-2 { color: #e2e8f0; text-shadow: 0 0 10px rgba(226, 232, 240, 0.5); }
+        .rank-num-3 { color: #d97706; text-shadow: 0 0 10px rgba(217, 119, 6, 0.5); }
+
+        .mode-card-item {
+            background: rgba(18, 24, 38, 0.7);
+            border: 2px solid rgba(245, 158, 11, 0.35);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(245, 158, 11, 0.05);
+        }
+        .mode-card-item:hover {
+            border-color: rgba(245, 158, 11, 0.9);
+            background: rgba(245, 158, 11, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3), inset 0 0 15px rgba(245, 158, 11, 0.15);
+        }
+        .mode-card-item.active {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.22);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.4), inset 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+
+        .mode-btn {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mode-btn:hover {
+            border-color: rgba(245, 158, 11, 0.5);
+        }
+
+        .team-tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .team-tab-btn.active {
+            background: rgba(245, 158, 11, 0.18);
+            border-color: #f59e0b;
+            color: #f59e0b;
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20 selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Navigation Bar -->
+    <header class="border-b border-cyber-border/80 bg-cyber-bg/85 backdrop-blur-2xl sticky top-0 z-40 transition-all duration-300 reveal">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-red-600 flex items-center justify-center text-slate-950 text-xl shadow-lg shadow-amber-500/30 group-hover:scale-105 transition-transform duration-200 font-black">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-black text-xl tracking-wider text-white font-subheading leading-none">VC <span class="text-amber-400">TIERS</span></span>
+                        <span class="text-[9px] text-gray-400 font-bold tracking-widest uppercase mt-0.5">Cobblemon Arena</span>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center gap-1 text-xs font-bold font-subheading text-gray-300">
+                    <a href="#hero" class="px-3.5 py-2 rounded-xl bg-white/5 text-amber-400 border border-amber-500/35 transition-all duration-200"><i class="fa-solid fa-house mr-1.5"></i>Trang Chủ</a>
+                    <a href="#modes-section" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-white/5 transition-all duration-200"><i class="fa-solid fa-gamepad mr-1.5 text-amber-400"></i>Chế Độ & Test</a>
+                    <a href="#rankings" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-white/5 transition-all duration-200"><i class="fa-solid fa-trophy mr-1.5 text-amber-400"></i>Bảng Xếp Hạng</a>
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="copyIP()" class="hidden sm:flex items-center gap-2.5 bg-cyber-card border border-cyber-border hover:border-amber-500/60 active:scale-95 px-4 py-2 rounded-xl transition-all duration-200 hover:-translate-y-0.5 group shadow-md cursor-pointer">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span class="text-xs font-bold text-gray-200">vuamc.net</span>
+                    <i class="fa-regular fa-copy text-xs text-gray-400 group-hover:text-amber-400 transition-colors"></i>
+                </button>
+
+                <button id="adminLoginBtn" onclick="handleAdminBtnClick()" class="bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-black text-xs px-4 py-2 rounded-xl transition-all duration-200 hover:-translate-y-0.5 flex items-center gap-1.5 font-subheading shadow-lg shadow-amber-500/25 cursor-pointer">
+                    <i id="adminBtnIcon" class="fa-solid fa-key"></i> <span id="adminBtnText">Admin</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="max-w-7xl mx-auto px-4 py-10 lg:py-14">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-7 space-y-6 reveal">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-extrabold tracking-wider uppercase font-subheading">
+                    <i class="fa-solid fa-fire text-amber-500"></i>
+                    COBBLEMON SEASON • VC TIERS RANKING
+                </div>
+
+                <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl text-white uppercase tracking-tight">
+                    HỆ THỐNG XẾP HẠNG <br>
+                    <span class="text-glow-orange">VC TIERS</span> VUAMC.NET
+                </h1>
+
+                <p class="text-sm md:text-base text-gray-400 max-w-xl leading-relaxed">
+                    Đấu trường đánh giá năng lực Cobblemon PvP chuẩn xác, minh bạch dành riêng cho cộng đồng người chơi tại <span class="text-amber-400 font-bold font-subheading">vuamc.net</span>. Khẳng định trình độ và chinh phục đỉnh cao![cite: 5]
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3 pt-2">
+                    <a href="#rankings" class="btn-orange-glow active:scale-95 px-6 py-3.5 rounded-xl text-slate-950 font-black text-xs flex items-center gap-2 font-subheading tracking-wider uppercase">
+                        <i class="fa-solid fa-trophy"></i> BẢNG XẾP HẠNG <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </a>
+
+                    <a href="https://discord.gg/7yyrf23kh" target="_blank" class="px-5 py-3.5 rounded-xl glass-panel hover:bg-white/10 active:scale-95 text-white border border-cyber-border font-bold text-xs flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 font-subheading">
+                        <i class="fa-brands fa-discord text-indigo-400 text-sm"></i> ĐĂNG KÝ TEST <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400"></i>
+                    </a>
+
+                    <button onclick="copyIP()" class="btn-green-glow active:scale-95 px-5 py-3.5 rounded-xl font-bold text-xs flex items-center gap-2 font-subheading cursor-pointer">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        vuamc.net <i class="fa-regular fa-copy text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Champion Card -->
+            <div class="lg:col-span-5 reveal" style="transition-delay: 0.2s;">
+                <div id="championDisplayCard" onclick="openProfileModal(currentChampId)" class="champion-card rounded-3xl p-6 md:p-8 relative overflow-hidden backdrop-blur-2xl cursor-pointer hover:border-amber-400/70 group active:scale-[0.99] transition-all">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-2 text-xs font-black text-amber-400 uppercase font-subheading tracking-wider">
+                            <i class="fa-solid fa-crown text-amber-400 text-base"></i> Quán Quân Hiện Tại
+                        </div>
+                        <span class="px-3 py-1 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-400 text-[10px] font-black font-subheading shadow-sm">#1 OVERALL</span>
+                    </div>
+
+                    <div class="text-center my-4">
+                        <div class="relative inline-block">
+                            <div class="w-24 h-24 rounded-2xl p-1 bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-300 shadow-2xl shadow-amber-500/40 mx-auto group-hover:scale-105 transition-transform duration-300">
+                                <img id="champAvatar" src="https://mc-heads.net/avatar/Marlowww/96" class="w-full h-full rounded-xl bg-cyber-bg object-cover" alt="Champion Avatar">
+                            </div>
+                            <span class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 text-[9px] font-black px-3 py-0.5 rounded-full uppercase tracking-widest font-subheading shadow-md">CHAMPION</span>
+                        </div>
+
+                        <h2 id="champName" class="text-2xl font-black text-white font-subheading mt-4 tracking-wide">Marlowww</h2>
+                        <p id="champTitle" class="text-xs text-amber-400 font-bold font-subheading"><i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>PKM Challenger</p>
+                    </div>
+
+                    <div class="bg-cyber-bg/90 border border-cyber-border rounded-2xl p-3 text-center my-4 shadow-inner">
+                        <span class="text-xs text-gray-400 font-bold font-subheading uppercase mr-2"><i class="fa-solid fa-bolt text-amber-400 mr-1"></i>Tổng điểm Overall:</span>
+                        <span id="champPoints" class="text-lg font-black text-amber-400 font-subheading">180 ĐIỂM</span>
+                    </div>
+
+                    <div class="space-y-2 pt-1">
+                        <div class="text-[10px] font-extrabold text-gray-400 uppercase tracking-wider font-subheading">Danh Hiệu Bậc Tier:</div>
+                        <div id="champTiersList" class="flex flex-wrap gap-1.5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODES LEADERBOARD & TESTING FLOW -->
+    <section id="modes-section" class="max-w-7xl mx-auto px-4 py-8 reveal">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-6 glass-panel rounded-3xl p-6 border border-cyber-border flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs font-black tracking-widest text-gray-400 uppercase font-subheading">MODES LEADERBOARD</span>
+                        <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-[10px] font-black font-subheading">4 Chế Độ</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                        <div onclick="switchMode('1vs1')" id="card-mode-1vs1" class="mode-card-item">
+                            <div class="w-10 h-10 rounded-xl bg-red-500/15 border border-red-500/30 flex items-center justify-center text-red-400 text-lg"><i class="fa-solid fa-crosshairs"></i></div>
+                            <span class="text-xs font-black text-white font-subheading">1VS1</span>
+                        </div>
+                        <div onclick="switchMode('2vs2')" id="card-mode-2vs2" class="mode-card-item">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 text-lg"><i class="fa-solid fa-hand-fist"></i></div>
+                            <span class="text-xs font-black text-white font-subheading">2VS2</span>
+                        </div>
+                        <div onclick="switchMode('3vs3')" id="card-mode-3vs3" class="mode-card-item">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg"><i class="fa-solid fa-shield-halved"></i></div>
+                            <span class="text-xs font-black text-white font-subheading">3VS3</span>
+                        </div>
+                        <div onclick="switchMode('4vs4')" id="card-mode-4vs4" class="mode-card-item">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg"><i class="fa-solid fa-users-rays"></i></div>
+                            <span class="text-xs font-black text-white font-subheading">4VS4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 glass-panel rounded-3xl p-6 border border-cyber-border flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-black tracking-widest text-gray-400 uppercase font-subheading">TESTING FLOW</span>
+                        <span id="flowStepCount" class="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300 text-[10px] font-bold font-subheading">1/4</span>
+                    </div>
+                    <h3 class="text-xl font-black text-white font-subheading mb-4">Quy trình Test chi tiết</h3>
+                    <div class="bg-cyber-bg/90 border border-cyber-border rounded-2xl p-6 text-center relative min-h-[190px] flex flex-col items-center justify-center">
+                        <button onclick="prevStep()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-cyber-card border border-cyber-border hover:border-amber-400 text-gray-400 hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-md"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                        <div id="flowStepContent" class="space-y-3 px-8"></div>
+                        <button onclick="nextStep()" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-cyber-card border border-cyber-border hover:border-amber-400 text-gray-400 hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-md"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <main id="rankings" class="max-w-7xl mx-auto px-4 pt-4 reveal">
+        <div class="flex items-center justify-between mb-6 border-b border-cyber-border pb-4">
+            <div>
+                <h2 class="text-2xl font-black text-white font-subheading uppercase flex items-center gap-3">
+                    <i class="fa-solid fa-trophy text-amber-400"></i> BẢNG XẾP HẠNG CAO THỦ
+                </h2>
+                <p class="text-xs text-gray-400 mt-1">Chạm vào tuyển thủ bất kỳ để xem Profile chi tiết & Đội hình Cobblemon.</p>
+            </div>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-3 mb-6 flex flex-col lg:flex-row items-center justify-between gap-4 shadow-xl">
+            <div class="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-1 lg:pb-0">
+                <button onclick="switchMode('overall')" id="btn-overall" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-extrabold bg-amber-500 text-slate-950 flex items-center gap-2 transition-all cursor-pointer font-subheading shadow-lg shadow-amber-500/25"><i class="fa-solid fa-crown"></i> Overall</button>
+                <button onclick="switchMode('1vs1')" id="btn-1vs1" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 transition-all cursor-pointer font-subheading"><i class="fa-solid fa-crosshairs text-red-400"></i> 1vs1</button>
+                <button onclick="switchMode('2vs2')" id="btn-2vs2" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 transition-all cursor-pointer font-subheading"><i class="fa-solid fa-hand-fist text-amber-400"></i> 2vs2</button>
+                <button onclick="switchMode('3vs3')" id="btn-3vs3" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 transition-all cursor-pointer font-subheading"><i class="fa-solid fa-shield-halved text-emerald-400"></i> 3vs3</button>
+                <button onclick="switchMode('4vs4')" id="btn-4vs4" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 transition-all cursor-pointer font-subheading"><i class="fa-solid fa-users-rays text-blue-400"></i> 4vs4</button>
+            </div>
+
+            <div class="flex items-center gap-3 w-full lg:w-auto">
+                <div class="relative w-full sm:w-60">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
+                    <input type="text" id="searchInput" oninput="renderTable()" placeholder="Tìm tên tuyển thủ..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
+                </div>
+
+                <div id="adminControls" class="hidden min-w-max">
+                    <button onclick="openPlayerModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-600/25 flex items-center gap-1.5 font-subheading cursor-pointer">
+                        <i class="fa-solid fa-user-plus"></i> Thêm Player
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="playerListContainer" class="space-y-3"></div>
+    </main>
+
+    <!-- Modal Profile -->
+    <div id="profileModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="glass-panel border border-cyber-border w-full max-w-4xl rounded-3xl p-6 shadow-2xl relative max-h-[92vh] overflow-y-auto">
+            <button onclick="closeProfileModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-cyber-bg border border-cyber-border hover:border-amber-400 text-gray-400 hover:text-white flex items-center justify-center cursor-pointer shadow-md"><i class="fa-solid fa-xmark text-sm"></i></button>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center border-b border-cyber-border pb-6">
+                <div class="md:col-span-4 flex flex-col items-center text-center border-b md:border-b-0 md:border-r border-cyber-border pb-4 md:pb-0 md:pr-4">
+                    <img id="profileBodySkin" src="https://mc-heads.net/body/Marlowww/120" class="h-36 object-contain mb-2" alt="Player Skin">
+                    <h3 id="profileName" class="text-2xl font-black text-white font-subheading">Marlowww</h3>
+                    <p id="profileTitle" class="text-xs text-amber-400 font-bold font-subheading mt-0.5"><i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>PKM Challenger</p>
+                    <span id="profileRegion" class="region-badge region-vn mt-2">VN</span>
+                </div>
+
+                <div class="md:col-span-8 space-y-4">
+                    <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 text-center">
+                        <span class="text-xs text-gray-400 font-bold font-subheading uppercase block mb-1">TỔNG ĐIỂM XẾP HẠNG</span>
+                        <span id="profilePoints" class="text-3xl font-black text-amber-400 font-subheading">180 ĐIỂM</span>
+                    </div>
+                    <div>
+                        <div class="text-xs font-black text-gray-400 uppercase tracking-wider font-subheading mb-2">BẬC TIER CÁC THỂ THỨC:</div>
+                        <div id="profileTiersGrid" class="grid grid-cols-2 gap-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6">
+                <div class="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
+                    <button onclick="switchTeamTab('1vs1')" id="tab-team-1vs1" class="team-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-gray-300 font-subheading flex items-center gap-1.5 active cursor-pointer"><i class="fa-solid fa-crosshairs text-red-400"></i> 1vs1</button>
+                    <button onclick="switchTeamTab('2vs2')" id="tab-team-2vs2" class="team-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-gray-300 font-subheading flex items-center gap-1.5 cursor-pointer"><i class="fa-solid fa-hand-fist text-amber-400"></i> 2vs2</button>
+                    <button onclick="switchTeamTab('3vs3')" id="tab-team-3vs3" class="team-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-gray-300 font-subheading flex items-center gap-1.5 cursor-pointer"><i class="fa-solid fa-shield-halved text-emerald-400"></i> 3vs3</button>
+                    <button onclick="switchTeamTab('4vs4')" id="tab-team-4vs4" class="team-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-gray-300 font-subheading flex items-center gap-1.5 cursor-pointer"><i class="fa-solid fa-users-rays text-blue-400"></i> 4vs4</button>
+                </div>
+                <div id="profileTeamGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Auth Modal -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="glass-panel border border-cyber-border w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+            <h3 class="text-xl font-bold text-white mb-1 font-subheading"><i class="fa-solid fa-lock text-amber-400 mr-2"></i>Xác thực Admin</h3>
+            <input type="password" id="adminPasswordInput" onkeyup="if(event.key==='Enter') loginAdmin()" placeholder="Nhập mật khẩu Admin..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white mb-4 focus:outline-none focus:border-amber-400 text-sm">
+            <div class="flex justify-end gap-2 font-subheading">
+                <button onclick="toggleAdminModal()" class="px-4 py-2 rounded-xl bg-white/5 text-gray-300 text-xs font-bold cursor-pointer">Hủy</button>
+                <button onclick="loginAdmin()" class="px-4 py-2 rounded-xl bg-amber-500 text-slate-950 text-xs font-black cursor-pointer shadow-md">Đăng nhập</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Form Admin Modal (Fixed Z-Index & Clickability) -->
+    <div id="playerModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-[100] flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel border border-cyber-border w-full max-w-3xl rounded-2xl p-6 shadow-2xl relative my-auto">
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-cyber-border">
+                <h3 id="modalTitle" class="text-xl font-bold text-white font-subheading flex items-center gap-2"><i class="fa-solid fa-user-pen text-emerald-400"></i>Quản Lý Tuyển Thủ</h3>
+                <button type="button" onclick="closePlayerModal()" class="w-8 h-8 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
+            </div>
+
+            <input type="hidden" id="editingPlayerId" value="">
+
+            <div class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tên Ingame Minecraft *</label>
+                        <input type="text" id="playerFormName" placeholder="Ví dụ: Marlowww" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-emerald-400">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-amber-400 mb-1 block font-subheading">Rank PKM (Tự Động)</label>
+                        <input type="text" id="playerFormTitle" readonly class="w-full bg-cyber-bg border border-amber-500/40 rounded-xl px-3 py-2.5 text-amber-400 font-bold text-sm cursor-not-allowed font-subheading" value="PKM Challenger">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Khu vực</label>
+                        <input type="text" id="playerFormRegion" value="VN" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-emerald-400">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-amber-400 mb-1 block font-subheading">Tổng Điểm Tự Động</label>
+                        <input type="number" id="playerFormPoints" readonly class="w-full bg-cyber-bg border border-amber-500/40 rounded-xl px-3 py-2.5 text-amber-400 font-bold text-sm cursor-not-allowed font-subheading" value="0">
+                    </div>
+                </div>
+
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-3">
+                    <label class="text-xs font-black text-blue-400 mb-1 block uppercase font-subheading"><i class="fa-solid fa-user-group mr-1"></i> Đồng đội đi cùng Mode 4vs4 (Duo Partner)</label>
+                    <input type="text" id="playerFormTeammate4v4" placeholder="Nhập tên Tuyển thủ đi cùng" class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
+                </div>
+
+                <div class="border-t border-cyber-border pt-4">
+                    <label class="text-xs font-black text-amber-400 mb-2 block uppercase font-subheading"><i class="fa-solid fa-layer-group mr-1.5"></i> Thiết Lập Bậc Tier</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div class="flex items-center justify-between bg-cyber-bg p-2.5 rounded-xl border border-cyber-border">
+                            <span class="text-xs font-bold text-gray-200">1vs1:</span>
+                            <select id="tier_1vs1" onchange="calculateAutoPointsAndRank()" class="tier-select bg-cyber-card border border-cyber-border rounded-lg px-2 py-1.5 text-xs text-white"></select>
+                        </div>
+                        <div class="flex items-center justify-between bg-cyber-bg p-2.5 rounded-xl border border-cyber-border">
+                            <span class="text-xs font-bold text-gray-200">2vs2:</span>
+                            <select id="tier_2vs2" onchange="calculateAutoPointsAndRank()" class="tier-select bg-cyber-card border border-cyber-border rounded-lg px-2 py-1.5 text-xs text-white"></select>
+                        </div>
+                        <div class="flex items-center justify-between bg-cyber-bg p-2.5 rounded-xl border border-cyber-border">
+                            <span class="text-xs font-bold text-gray-200">3vs3:</span>
+                            <select id="tier_3vs3" onchange="calculateAutoPointsAndRank()" class="tier-select bg-cyber-card border border-cyber-border rounded-lg px-2 py-1.5 text-xs text-white"></select>
+                        </div>
+                        <div class="flex items-center justify-between bg-cyber-bg p-2.5 rounded-xl border border-cyber-border">
+                            <span class="text-xs font-bold text-gray-200">4vs4:</span>
+                            <select id="tier_4vs4" onchange="calculateAutoPointsAndRank()" class="tier-select bg-cyber-card border border-cyber-border rounded-lg px-2 py-1.5 text-xs text-white"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inputs Đội hình Pokémon -->
+                <div class="border-t border-cyber-border pt-4 space-y-3">
+                    <label class="text-xs font-black text-amber-400 block uppercase font-subheading"><i class="fa-solid fa-dragon mr-1.5"></i> Nhập Đội Hình Pokémon (6 con mỗi mode)</label>
+                    <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
+                        <span class="text-xs font-bold text-red-400 block mb-2">Đội hình 1vs1:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
+                            <input type="text" id="poke_1v1_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                        </div>
+                    </div>
+                    <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
+                        <span class="text-xs font-bold text-amber-400 block mb-2">Đội hình 2vs2:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
+                            <input type="text" id="poke_2v2_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                        </div>
+                    </div>
+                    <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
+                        <span class="text-xs font-bold text-emerald-400 block mb-2">Đội hình 3vs3:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
+                            <input type="text" id="poke_3v3_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                        </div>
+                    </div>
+                    <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
+                        <span class="text-xs font-bold text-blue-400 block mb-2">Đội hình 4vs4:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
+                            <input type="text" id="poke_4v4_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-cyber-border font-subheading">
+                <button type="button" onclick="closePlayerModal()" class="px-5 py-2.5 rounded-xl bg-white/5 text-gray-300 text-xs font-bold cursor-pointer">Hủy</button>
+                <button type="button" onclick="savePlayer()" class="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black shadow-lg shadow-emerald-500/25 cursor-pointer">Lưu Tuyển Thủ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                    else entry.target.classList.remove('active');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        let isAdminLoggedIn = localStorage.getItem('isAdmin') === 'true';
+        const ADMIN_PASS = "admin123";
+        let currentMode = 'overall';
+        let currentChampId = '1';
+        let activeProfilePlayer = null;
+        let activeTeamTab = '1vs1';
+        let currentFlowStep = 1;
+
+        const flowSteps = [
+            { step: 1, icon: 'fa-brands fa-discord text-indigo-400', title: 'Tham gia Discord', desc: 'Truy cập Server Discord chính thức tại <a href="https://discord.gg/7yyrf23kh" target="_blank" class="text-indigo-400 underline font-bold">discord.gg/7yyrf23kh</a> để nhận hỗ trợ.' },
+            { step: 2, icon: 'fa-solid fa-clipboard-list text-amber-400', title: 'Tạo Ticket Đăng Ký', desc: 'Mở Ticket tại kênh #dang-ky-test và điền đầy đủ Ingame Minecraft & Thể thức tham gia.' },
+            { step: 3, icon: 'fa-solid fa-gamepad text-emerald-400', title: 'Thi Đấu Đánh Giá Tier', desc: 'Gặp Tester được phân công tại máy chủ vuamc.net để tiến hành trận đấu PvP thử nghiệm.' },
+            { step: 4, icon: 'fa-solid fa-award text-blue-400', title: 'Cập Nhật Xếp Hạng', desc: 'Kết quả thử nghiệm sẽ được cập nhật trực tiếp lên hệ thống VC Tiers trong vòng 24h.' }
+        ];
+
+        function renderFlowStep() {
+            const data = flowSteps[currentFlowStep - 1];
+            document.getElementById('flowStepCount').innerText = `${data.step}/4`;
+            document.getElementById('flowStepContent').innerHTML = `
+                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl mx-auto"><i class="${data.icon}"></i></div>
+                <div class="text-[10px] font-black text-amber-400 uppercase tracking-widest font-subheading">BƯỚC 0${data.step}</div>
+                <h4 class="text-base font-black text-white font-subheading">${data.title}</h4>
+                <p class="text-xs text-gray-400 leading-relaxed max-w-sm mx-auto">${data.desc}</p>
+            `;
+        }
+        function nextStep() { currentFlowStep = currentFlowStep >= 4 ? 1 : currentFlowStep + 1; renderFlowStep(); }
+        function prevStep() { currentFlowStep = currentFlowStep <= 1 ? 4 : currentFlowStep - 1; renderFlowStep(); }
+
+        const TIER_POINTS = { 'HT1': 60, 'LT1': 45, 'HT2': 30, 'LT2': 20, 'HT3': 10, 'LT3': 6, 'HT4': 4, 'LT4': 3, 'HT5': 2, 'LT5': 1 };
+        const tierOptions = ['HT1', 'LT1', 'HT2', 'LT2', 'HT3', 'LT3', 'HT4', 'LT4', 'HT5', 'LT5'];
+        const MODE_ICONS = {
+            '1vs1': { icon: 'fa-solid fa-crosshairs', color: 'text-red-400' },
+            '2vs2': { icon: 'fa-solid fa-hand-fist', color: 'text-amber-400' },
+            '3vs3': { icon: 'fa-solid fa-shield-halved', color: 'text-emerald-400' },
+            '4vs4': { icon: 'fa-solid fa-users-rays', color: 'text-blue-400' }
+        };
+
+        function getPokemonSpriteUrl(pokeName) {
+            if (!pokeName) return '';
+            const clean = pokeName.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+            return `https://play.pokemonshowdown.com/sprites/gen5/${clean}.png`;
+        }
+
+        function populateTierSelects() {
+            document.querySelectorAll('.tier-select').forEach(select => {
+                select.innerHTML = '<option value="">-- Không xếp hạng --</option>';
+                tierOptions.forEach(t => { select.innerHTML += `<option value="${t}">${t} (+${TIER_POINTS[t]} pts)</option>`; });
+            });
+        }
+
+        function calculateAutoPointsAndRank() {
+            const r1 = document.getElementById('tier_1vs1').value;
+            const r2 = document.getElementById('tier_2vs2').value;
+            const r3 = document.getElementById('tier_3vs3').value;
+            const r4 = document.getElementById('tier_4vs4').value;
+            let total = 0;
+            if (r1 && TIER_POINTS[r1]) total += TIER_POINTS[r1];
+            if (r2 && TIER_POINTS[r2]) total += TIER_POINTS[r2];
+            if (r3 && TIER_POINTS[r3]) total += TIER_POINTS[r3];
+            if (r4 && TIER_POINTS[r4]) total += TIER_POINTS[r4];
+            document.getElementById('playerFormPoints').value = total;
+
+            let autoRank = 'PKM Expert';
+            if (total >= 180) autoRank = 'PKM Challenger';
+            else if (total >= 120) autoRank = 'PKM Grandmaster';
+            else if (total >= 80) autoRank = 'PKM Master';
+            else if (total >= 40) autoRank = 'PKM Elite';
+            document.getElementById('playerFormTitle').value = autoRank;
+        }
+
+        const defaultPlayers = [
+            {
+                id: '1', name: 'Marlowww', title: 'PKM Challenger', region: 'VN', points: 180, teammate4v4: 'ItzRealMe',
+                teams: {
+                    '1vs1': ['Rayquaza', 'Charizard', 'Lucario', 'Mewtwo', 'Dialga', 'Palkia'],
+                    '2vs2': ['Garchomp', 'Tyranitar', 'Zapdos', 'Dragonite', 'Metagross', 'Greninja'],
+                    '3vs3': ['Dragonite', 'Metagross', 'Greninja', 'Rayquaza', 'Charizard', 'Lucario'],
+                    '4vs4': ['Arceus', 'Mewtwo', 'Rayquaza', 'Giratina', 'Dialga', 'Palkia']
+                },
+                tiers: [{ mode: '1vs1', rank: 'HT1' }, { mode: '2vs2', rank: 'HT1' }, { mode: '3vs3', rank: 'HT1' }, { mode: '4vs4', rank: 'HT1' }]
+            }
+        ];
+
+        let players = JSON.parse(localStorage.getItem('vctiers_players_v19')) || defaultPlayers;
+        function saveToLocalStorage() { localStorage.setItem('vctiers_players_v19', JSON.stringify(players)); }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.className = "mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 transition-all cursor-pointer font-subheading";
+            });
+            const activeBtn = document.getElementById(`btn-${mode}`);
+            if(activeBtn) activeBtn.className = "mode-btn px-4 py-2.5 rounded-xl text-xs font-black bg-amber-500 text-slate-950 flex items-center gap-2 transition-all cursor-pointer font-subheading shadow-lg shadow-amber-500/25";
+            renderTable();
+        }
+
+        function updateChampionCard(champ) {
+            if(!champ) return;
+            currentChampId = champ.id;
+            document.getElementById('champAvatar').src = `https://mc-heads.net/avatar/${champ.name}/96`;
+            document.getElementById('champName').innerText = champ.name;
+            document.getElementById('champTitle').innerHTML = `<i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>${champ.title}`;
+            document.getElementById('champPoints').innerText = `${champ.points} ĐIỂM`;
+            document.getElementById('champTiersList').innerHTML = champ.tiers.map(t => `<span class="badge-tier tier-${t.rank.toLowerCase()}">${t.mode}: ${t.rank}</span>`).join(' ');
+        }
+
+        function renderTable() {
+            const container = document.getElementById('playerListContainer');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            container.innerHTML = '';
+
+            let filtered = players.filter(p => p.name.toLowerCase().includes(searchVal));
+            if (currentMode !== 'overall') filtered = filtered.filter(p => p.tiers.some(t => t.mode === currentMode));
+
+            filtered.forEach(p => {
+                let pts = 0;
+                p.tiers.forEach(t => { if(TIER_POINTS[t.rank]) pts += TIER_POINTS[t.rank]; });
+                p.points = pts;
+            });
+            filtered.sort((a, b) => b.points - a.points);
+            if(filtered.length > 0) updateChampionCard(filtered[0]);
+
+            filtered.forEach((player, index) => {
+                const rankNum = index + 1;
+                const rankClass = rankNum === 1 ? 'rank-num-1' : rankNum === 2 ? 'rank-num-2' : rankNum === 3 ? 'rank-num-3' : 'text-gray-500';
+                let displayTiers = currentMode !== 'overall' ? player.tiers.filter(t => t.mode === currentMode) : player.tiers;
+
+                let tiersPillsHTML = displayTiers.map(t => {
+                    const modeObj = MODE_ICONS[t.mode] || { icon: 'fa-solid fa-shield', color: 'text-gray-300' };
+                    let teammateBadge = (t.mode === '4vs4' && player.teammate4v4) ? `<span class="text-[9px] text-blue-300 ml-1 border-l border-white/20 pl-1"><i class="fa-solid fa-link text-[8px]"></i> ${player.teammate4v4}</span>` : '';
+                    return `<span class="badge-tier tier-${t.rank.toLowerCase()}"><i class="${modeObj.icon} ${modeObj.color}"></i> ${t.rank}${teammateBadge}</span>`;
+                }).join(' ');
+
+                const card = document.createElement('div');
+                card.className = `glass-panel glass-card-interactive rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer`;
+                card.onclick = (e) => { if(!e.target.closest('button')) openProfileModal(player.id); };
+                card.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <div class="rank-num ${rankClass} w-8 text-center">${rankNum}.</div>
+                        <img src="https://mc-heads.net/avatar/${player.name}/44" class="w-11 h-11 rounded-xl bg-cyber-bg border border-cyber-border shadow" alt="${player.name}">
+                        <div>
+                            <span class="font-extrabold text-white text-base font-subheading">${player.name}</span>
+                            <div class="text-xs text-gray-400 font-medium flex items-center gap-2">
+                                <span class="text-amber-400 font-bold"><i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>${player.title}</span> 
+                                <span class="text-gray-500">(${player.points} pts)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 border-t sm:border-t-0 border-cyber-border pt-2 sm:pt-0">
+                        <div class="flex items-center gap-1.5 flex-wrap">${tiersPillsHTML}</div>
+                        <div class="flex items-center gap-3">
+                            <span class="region-badge region-vn">${player.region}</span>
+                            ${isAdminLoggedIn ? `
+                            <div class="flex items-center gap-1 border-l border-cyber-border pl-2">
+                                <button type="button" onclick="openPlayerModal('${player.id}')" class="text-amber-400 text-xs p-1.5 rounded-lg bg-amber-500/10 cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button type="button" onclick="deletePlayer('${player.id}')" class="text-red-400 text-xs p-1.5 rounded-lg bg-red-500/10 cursor-pointer"><i class="fa-solid fa-trash"></i></button>
+                            </div>` : ''}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function openProfileModal(id) {
+            const p = players.find(x => x.id === id);
+            if(!p) return;
+            activeProfilePlayer = p;
+            document.getElementById('profileBodySkin').src = `https://mc-heads.net/body/${p.name}/120`;
+            document.getElementById('profileName').innerText = p.name;
+            document.getElementById('profileTitle').innerHTML = `<i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>${p.title}`;
+            document.getElementById('profileRegion').innerText = p.region;
+            document.getElementById('profilePoints').innerText = `${p.points} ĐIỂM`;
+
+            const gridContainer = document.getElementById('profileTiersGrid');
+            gridContainer.innerHTML = '';
+            ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => {
+                const found = p.tiers.find(t => t.mode === m);
+                gridContainer.innerHTML += `
+                    <div class="bg-cyber-bg border border-cyber-border p-2.5 rounded-xl flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-400">${m}:</span>
+                        <span class="badge-tier ${found ? 'tier-' + found.rank.toLowerCase() : 'bg-cyber-bg text-gray-500'}">${found ? found.rank : 'Chưa có'}</span>
+                    </div>`;
+            });
+            switchTeamTab('1vs1');
+            document.getElementById('profileModal').classList.remove('hidden');
+        }
+
+        function switchTeamTab(mode) {
+            activeTeamTab = mode;
+            document.querySelectorAll('.team-tab-btn').forEach(btn => btn.classList.remove('active'));
+            const activeTab = document.getElementById(`tab-team-${mode}`);
+            if(activeTab) activeTab.classList.add('active');
+            renderProfileTeam();
+        }
+
+        function renderProfileTeam() {
+            if(!activeProfilePlayer) return;
+            const teamGrid = document.getElementById('profileTeamGrid');
+            teamGrid.innerHTML = '';
+            const currentTeamList = (activeProfilePlayer.teams || {})[activeTeamTab] || [];
+            currentTeamList.forEach(poke => {
+                if(poke && poke.trim()) {
+                    teamGrid.innerHTML += `
+                        <div class="bg-cyber-bg/90 border border-cyber-border p-3 rounded-2xl flex flex-col items-center text-center">
+                            <img src="${getPokemonSpriteUrl(poke)}" class="w-14 h-14 object-contain mb-1" onerror="this.src='https://play.pokemonshowdown.com/sprites/gen5/substitute.png'">
+                            <span class="text-xs font-extrabold text-white capitalize truncate w-full">${poke}</span>
+                        </div>`;
+                }
+            });
+        }
+
+        function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); }
+        function handleAdminBtnClick() {
+            if (isAdminLoggedIn) {
+                if(confirm("Đăng xuất Admin?")) { isAdminLoggedIn = false; localStorage.setItem('isAdmin', 'false'); updateAdminUI(); renderTable(); }
+            } else { toggleAdminModal(); }
+        }
+        function updateAdminUI() {
+            document.getElementById('adminControls').classList.toggle('hidden', !isAdminLoggedIn);
+            document.getElementById('adminBtnText').innerText = isAdminLoggedIn ? "Thoát Admin" : "Admin";
+        }
+        function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); }
+        function loginAdmin() {
+            if (document.getElementById('adminPasswordInput').value === ADMIN_PASS) {
+                isAdminLoggedIn = true; localStorage.setItem('isAdmin', 'true');
+                updateAdminUI(); toggleAdminModal(); renderTable();
+            } else { alert("Sai mật khẩu Admin!"); }
+        }
+
+        function openPlayerModal(playerId = null) {
+            document.getElementById('editingPlayerId').value = playerId || '';
+            if (playerId) {
+                const p = players.find(x => x.id === playerId);
+                if (p) {
+                    document.getElementById('playerFormName').value = p.name;
+                    document.getElementById('playerFormRegion').value = p.region;
+                    document.getElementById('playerFormTeammate4v4').value = p.teammate4v4 || '';
+                    p.tiers.forEach(t => {
+                        const sel = document.getElementById(`tier_${t.mode}`);
+                        if(sel) sel.value = t.rank;
+                    });
+                    ['1v1', '2v2', '3v3', '4v4'].forEach(mKey => {
+                        const modeFull = mKey === '1v1' ? '1vs1' : mKey === '2v2' ? '2vs2' : mKey === '3v3' ? '3vs3' : '4vs4';
+                        const list = (p.teams || {})[modeFull] || [];
+                        for(let i=0; i<6; i++) document.getElementById(`poke_${mKey}_${i}`).value = list[i] || '';
+                    });
+                    calculateAutoPointsAndRank();
+                }
+            } else {
+                document.getElementById('playerFormName').value = '';
+                document.getElementById('playerFormTeammate4v4').value = '';
+                ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => { document.getElementById(`tier_${m}`).value = ""; });
+                ['1v1', '2v2', '3v3', '4v4'].forEach(mKey => { for(let i=0; i<6; i++) document.getElementById(`poke_${mKey}_${i}`).value = ''; });
+                calculateAutoPointsAndRank();
+            }
+            document.getElementById('playerModal').classList.remove('hidden');
+        }
+
+        function closePlayerModal() { document.getElementById('playerModal').classList.add('hidden'); }
+
+        function savePlayer() {
+            const id = document.getElementById('editingPlayerId').value;
+            const name = document.getElementById('playerFormName').value.trim();
+            if (!name) { alert("Vui lòng nhập tên Ingame Minecraft!"); return; }
+
+            const title = document.getElementById('playerFormTitle').value;
+            const teammate4v4 = document.getElementById('playerFormTeammate4v4').value.trim();
+            const teams = {};
+            ['1v1', '2v2', '3v3', '4v4'].forEach(mKey => {
+                const modeFull = mKey === '1v1' ? '1vs1' : mKey === '2v2' ? '2vs2' : mKey === '3v3' ? '3vs3' : '4vs4';
+                const pList = [];
+                for(let i=0; i<6; i++) {
+                    const val = document.getElementById(`poke_${mKey}_${i}`).value.trim();
+                    if(val) pList.push(val);
+                }
+                teams[modeFull] = pList;
+            });
+
+            const tiers = [];
+            ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => {
+                const val = document.getElementById(`tier_${m}`).value;
+                if(val) tiers.persh ? null : tiers.push({ mode: m, rank: val });
+            });
+
+            let points = 0;
+            tiers.forEach(t => { if(TIER_POINTS[t.rank]) points += TIER_POINTS[t.rank]; });
+
+            if (id) {
+                const p = players.find(x => x.id === id);
+                if (p) { p.name = name; p.title = title; p.teams = teams; p.tiers = tiers; p.points = points; p.teammate4v4 = teammate4v4; }
+            } else {
+                players.push({ id: Date.now().toString(), name, title, region: 'VN', points, tiers, teams, teammate4v4 });
+            }
+
+            saveToLocalStorage();
+            closePlayerModal();
+            renderTable();
+        }
+
+        function deletePlayer(id) {
+            if (confirm("Xóa tuyển thủ này?")) {
+                players = players.filter(p => p.id !== id);
+                saveToLocalStorage();
+                renderTable();
+            }
+        }
+
+        function copyIP() { navigator.clipboard.writeText("vuamc.net"); alert("Đã copy IP: vuamc.net"); }
+
+        populateTierSelects();
+        updateAdminUI();
+        renderFlowStep();
+        renderTable();
+    </script>
+</body>
+</html>
