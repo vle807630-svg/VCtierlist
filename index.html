@@ -947,7 +947,58 @@
         }
 
         function copyIP() { navigator.clipboard.writeText("vuamc.net"); alert("Đã copy IP: vuamc.net"); }
+ // Cấu hình GitHub Gist và Token
+const GIST_ID = "ad317397f4e7765a63417d77044f410d";
+const GITHUB_TOKEN = "ghp_mã_token_của_bạn_vào_đây"; // Thay mã ghp_... của bạn vào đây trong dấu ngoặc kép
+const FILENAME = "data.json";
 
+// 1. Hàm tải dữ liệu từ Gist về web
+async function loadPlayersFromGist() {
+  try {
+    const response = await fetch(`https://api.github.com/gists/${GIST_ID}`);
+    const data = await response.json();
+    const fileContent = data.files[FILENAME].content;
+    const jsonData = JSON.parse(fileContent);
+    if (jsonData && jsonData.players) {
+      players = jsonData.players;
+      renderTable();
+    }
+  } catch (error) {
+    console.error("Lỗi tải dữ liệu từ Gist:", error);
+  }
+}
+
+// 2. Hàm lưu dữ liệu từ web ngược lên Gist (khi có thêm/sửa/xóa)
+async function savePlayersToGist() {
+  try {
+    const payload = {
+      files: {
+        [FILENAME]: {
+          content: JSON.stringify({ players: players }, null, 2)
+        }
+      }
+    };
+
+    const response = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Lỗi cập nhật Gist: ${response.statusText}`);
+    }
+    console.log("Đã lưu dữ liệu lên Gist thành công!");
+  } catch (error) {
+    console.error("Lỗi khi lưu lên Gist:", error);
+  }
+}
+
+// Gọi hàm tải dữ liệu khi trang vừa mở
+loadPlayersFromGist();
         populateTierSelects();
         updateUIAuth();
         renderFlowStep();
