@@ -54,11 +54,6 @@
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .btn-orange-glow:hover { box-shadow: 0 6px 25px rgba(245, 158, 11, 0.55); transform: translateY(-2px); filter: brightness(1.05); }
-        .btn-green-glow {
-            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-green-glow:hover { border-color: rgba(16, 185, 129, 0.7); background: rgba(16, 185, 129, 0.18); box-shadow: 0 4px 18px rgba(16, 185, 129, 0.25); transform: translateY(-2px); }
         .glass-panel {
             background: rgba(13, 17, 26, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
@@ -264,11 +259,12 @@
                     <input type="text" id="searchInput" oninput="renderTable()" placeholder="Tìm tên tuyển thủ..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
                 </div>
 
-                <!-- Admin / Tester Quick Controls -->
+                <!-- Admin / Tester Controls (Chỉ hiện khi tài khoản đăng nhập là Admin hoặc Tester) -->
                 <div id="adminControls" class="hidden min-w-max flex items-center gap-2">
                     <button onclick="openPlayerModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-600/25 flex items-center gap-1.5 font-subheading cursor-pointer">
                         <i class="fa-solid fa-user-plus"></i> Thêm Player
                     </button>
+                    <!-- Nút phân quyền chỉ dành riêng cho Admin (qthangql) -->
                     <button id="manageRolesBtn" onclick="openRoleManagerModal()" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs px-3.5 py-2.5 rounded-xl shadow-lg flex items-center gap-1.5 font-subheading cursor-pointer">
                         <i class="fa-solid fa-user-shield"></i> Phân Quyền
                     </button>
@@ -322,8 +318,8 @@
             <button onclick="closeAuthModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
             
             <div class="flex items-center justify-center gap-4 mb-6 border-b border-cyber-border pb-4">
-                <button onclick="switchAuthTab('login')" id="authTabLoginBtn" class="text-base font-black text-amber-400 font-subheading pb-1 border-b-2 border-amber-400">Đăng Nhập</button>
-                <button onclick="switchAuthTab('register')" id="authTabRegBtn" class="text-base font-bold text-gray-400 font-subheading pb-1 border-b-2 border-transparent">Đăng Ký</button>
+                <button onclick="switchAuthTab('login')" id="authTabLoginBtn" class="text-base font-black text-amber-400 font-subheading pb-1 border-b-2 border-amber-400 cursor-pointer">Đăng Nhập</button>
+                <button onclick="switchAuthTab('register')" id="authTabRegBtn" class="text-base font-bold text-gray-400 font-subheading pb-1 border-b-2 border-transparent cursor-pointer">Đăng Ký</button>
             </div>
 
             <!-- Login Form -->
@@ -354,7 +350,7 @@
         </div>
     </div>
 
-    <!-- Role Manager Modal (Admin Chỉ định Tester) -->
+    <!-- Role Manager Modal (Admin Thăng Cấp Tester) -->
     <div id="roleManagerModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-[115] flex items-center justify-center p-4">
         <div class="glass-panel border border-cyber-border w-full max-w-xl rounded-3xl p-6 shadow-2xl relative">
             <button onclick="closeRoleManagerModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
@@ -493,7 +489,7 @@
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
 
-        // HỆ THỐNG USERS & AUTH & ROLES
+        // HỆ THỐNG USERS & AUTH & ROLES (ĐÃ THIẾT LẬP SẴN ADMIN GỐC qthangql)
         let currentUser = JSON.parse(localStorage.getItem('vctiers_current_user')) || null;
         let usersList = JSON.parse(localStorage.getItem('vctiers_users_db')) || [
             { username: 'qthangql', password: 'Dung12345D', role: 'admin' }
@@ -595,12 +591,12 @@
             const loginBox = document.getElementById('loginFormContainer');
             const regBox = document.getElementById('registerFormContainer');
             if(tab === 'login') {
-                loginBtn.className = "text-base font-black text-amber-400 font-subheading pb-1 border-b-2 border-amber-400";
-                regBtn.className = "text-base font-bold text-gray-400 font-subheading pb-1 border-b-2 border-transparent";
+                loginBtn.className = "text-base font-black text-amber-400 font-subheading pb-1 border-b-2 border-amber-400 cursor-pointer";
+                regBtn.className = "text-base font-bold text-gray-400 font-subheading pb-1 border-b-2 border-transparent cursor-pointer";
                 loginBox.classList.remove('hidden'); regBox.classList.add('hidden');
             } else {
-                regBtn.className = "text-base font-black text-emerald-400 font-subheading pb-1 border-b-2 border-emerald-400";
-                loginBtn.className = "text-base font-bold text-gray-400 font-subheading pb-1 border-b-2 border-transparent";
+                regBtn.className = "text-base font-black text-emerald-400 font-subheading pb-1 border-b-2 border-emerald-400 cursor-pointer";
+                loginBtn.className = "text-base font-bold text-gray-400 font-subheading pb-1 border-b-2 border-transparent cursor-pointer";
                 regBox.classList.remove('hidden'); loginBox.classList.add('hidden');
             }
         }
@@ -669,7 +665,7 @@
             }
         }
 
-        // ROLE MANAGER (Admin phân quyền Tester)
+        // ROLE MANAGER (Admin qthangql thăng cấp Tester)
         function openRoleManagerModal() {
             const container = document.getElementById('roleListContainer');
             container.innerHTML = '';
@@ -753,6 +749,7 @@
                     return `<span class="badge-tier tier-${t.rank.toLowerCase()}"><i class="${modeObj.icon} ${modeObj.color}"></i> ${t.rank}${teammateBadge}</span>`;
                 }).join(' ');
 
+                // Chỉ hiển thị nút chỉnh sửa nếu đã đăng nhập tài khoản Admin hoặc Tester
                 const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.role === 'tester');
 
                 const card = document.createElement('div');
