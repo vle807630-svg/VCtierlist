@@ -44,12 +44,7 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, transform;
-        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .hero-title { font-family: 'Montserrat', sans-serif; font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; }
         .text-glow-orange { color: #f97316; text-shadow: 0 0 35px rgba(249, 115, 22, 0.5), 0 0 70px rgba(249, 115, 22, 0.25); }
@@ -60,30 +55,25 @@
         }
         .btn-orange-glow:hover { box-shadow: 0 6px 25px rgba(245, 158, 11, 0.55); transform: translateY(-2px); filter: brightness(1.05); }
         .btn-green-glow {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.35);
-            color: #34d399;
+            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .btn-green-glow:hover { border-color: rgba(16, 185, 129, 0.7); background: rgba(16, 185, 129, 0.18); box-shadow: 0 4px 18px rgba(16, 185, 129, 0.25); transform: translateY(-2px); }
         .glass-panel {
-            background: rgba(13, 17, 26, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+            background: rgba(13, 17, 26, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .glass-card-interactive { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; }
+        .glass-card-interactive:hover { transform: translateY(-4px); border-color: rgba(245, 158, 11, 0.4); box-shadow: 0 15px 30px -10px rgba(245, 158, 11, 0.25); }
         .champion-card {
             background: linear-gradient(145deg, rgba(245, 158, 11, 0.15) 0%, rgba(13, 17, 26, 0.9) 50%, rgba(99, 102, 241, 0.1) 100%);
-            border: 1px solid rgba(245, 158, 11, 0.35);
-            box-shadow: 0 0 50px -10px rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.35); box-shadow: 0 0 50px -10px rgba(245, 158, 11, 0.2);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .badge-tier {
-            font-size: 0.68rem; font-weight: 800; padding: 4px 10px; border-radius: 8px;
-            display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase;
-            font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.5px;
+            font-size: 0.68rem; font-weight: 800; padding: 4px 10px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px;
+            text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.5px;
         }
         .tier-ht1 { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
         .tier-lt1 { background: rgba(249, 115, 22, 0.18); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); }
@@ -97,13 +87,12 @@
         .rank-num-2 { color: #e2e8f0; text-shadow: 0 0 10px rgba(226, 232, 240, 0.5); }
         .rank-num-3 { color: #d97706; text-shadow: 0 0 10px rgba(217, 119, 6, 0.5); }
         .mode-card-item {
-            background: rgba(18, 24, 38, 0.7); border: 2px solid rgba(245, 158, 11, 0.35); border-radius: 16px;
-            padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-            cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(18, 24, 38, 0.7); border: 2px solid rgba(245, 158, 11, 0.35); border-radius: 16px; padding: 20px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; cursor: pointer; transition: all 0.25s;
         }
         .mode-card-item:hover { border-color: rgba(245, 158, 11, 0.9); background: rgba(245, 158, 11, 0.15); transform: translateY(-3px); }
-        .mode-card-item.active { border-color: #f59e0b; background: rgba(245, 158, 11, 0.22); }
-        .team-tab-btn { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.2s ease; }
+        .mode-btn { border: 1px solid rgba(255, 255, 255, 0.12); transition: all 0.2s; }
+        .team-tab-btn { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.2s; }
         .team-tab-btn.active { background: rgba(245, 158, 11, 0.18); border-color: #f59e0b; color: #f59e0b; }
     </style>
 </head>
@@ -114,7 +103,7 @@
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-8">
                 <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-red-600 flex items-center justify-center text-slate-950 text-xl font-black shadow-lg shadow-amber-500/30">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-red-600 flex items-center justify-center text-slate-950 text-xl shadow-lg shadow-amber-500/30 group-hover:scale-105 transition-transform font-black">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
                     <div class="flex flex-col">
@@ -125,8 +114,8 @@
 
                 <nav class="hidden lg:flex items-center gap-1 text-xs font-bold font-subheading text-gray-300">
                     <a href="#hero" class="px-3.5 py-2 rounded-xl bg-white/5 text-amber-400 border border-amber-500/35"><i class="fa-solid fa-house mr-1.5"></i>Trang Chủ</a>
-                    <a href="#modes-section" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-white/5"><i class="fa-solid fa-gamepad mr-1.5 text-amber-400"></i>Chế Độ & Test</a>
-                    <a href="#rankings" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-white/5"><i class="fa-solid fa-trophy mr-1.5 text-amber-400"></i>Bảng Xếp Hạng</a>
+                    <a href="#modes-section" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-white/5 transition-all"><i class="fa-solid fa-gamepad mr-1.5 text-amber-400"></i>Chế Độ & Test</a>
+                    <a href="#rankings" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-white/5 transition-all"><i class="fa-solid fa-trophy mr-1.5 text-amber-400"></i>Bảng Xếp Hạng</a>
                 </nav>
             </div>
 
@@ -137,29 +126,10 @@
                     <i class="fa-regular fa-copy text-xs text-gray-400"></i>
                 </button>
 
-                <!-- Auth Buttons Before Login -->
-                <div id="authContainer" class="flex items-center gap-2">
-                    <button onclick="openAuthModal('register')" class="bg-white/10 hover:bg-white/15 text-white font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 font-subheading border border-cyber-border cursor-pointer">
-                        <i class="fa-solid fa-user-plus text-amber-400"></i> Đăng Ký
-                    </button>
-                    <button onclick="openAuthModal('login')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 font-subheading shadow-lg shadow-amber-500/25 cursor-pointer">
+                <!-- Auth Widget Area -->
+                <div id="authNavArea" class="flex items-center gap-2">
+                    <button onclick="openAuthModal('login')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs px-4 py-2 rounded-xl transition-all flex items-center gap-1.5 font-subheading shadow-lg shadow-amber-500/25 cursor-pointer">
                         <i class="fa-solid fa-right-to-bracket"></i> Đăng Nhập
-                    </button>
-                </div>
-
-                <!-- Profile Badge After Login -->
-                <div id="userProfileBadge" class="hidden items-center gap-3 bg-cyber-card border border-cyber-border px-3 py-1.5 rounded-xl">
-                    <div class="flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xs font-bold">
-                            <i id="userRoleIcon" class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <div class="flex flex-col text-left">
-                            <span id="currentUsernameDisplay" class="text-xs font-bold text-white font-subheading leading-none">User</span>
-                            <span id="currentUserRoleDisplay" class="text-[9px] text-amber-400 uppercase tracking-wider font-bold">Member</span>
-                        </div>
-                    </div>
-                    <button onclick="handleLogout()" class="text-gray-400 hover:text-red-400 text-xs p-1 transition-colors cursor-pointer" title="Đăng xuất">
-                        <i class="fa-solid fa-power-off"></i>
                     </button>
                 </div>
             </div>
@@ -170,7 +140,7 @@
     <section id="hero" class="max-w-7xl mx-auto px-4 py-10 lg:py-14">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div class="lg:col-span-7 space-y-6 reveal">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-extrabold tracking-wider uppercase font-subheading">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-extrabold uppercase font-subheading">
                     <i class="fa-solid fa-fire text-amber-500"></i> COBBLEMON SEASON • VC TIERS RANKING
                 </div>
                 <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl text-white uppercase tracking-tight">
@@ -180,38 +150,42 @@
                     Đấu trường đánh giá năng lực Cobblemon PvP chuẩn xác, minh bạch dành riêng cho cộng đồng người chơi tại <span class="text-amber-400 font-bold font-subheading">vuamc.net</span>. Khẳng định trình độ và chinh phục đỉnh cao!
                 </p>
                 <div class="flex flex-wrap items-center gap-3 pt-2">
-                    <a href="#rankings" class="btn-orange-glow px-6 py-3.5 rounded-xl text-slate-950 font-black text-xs flex items-center gap-2 font-subheading tracking-wider uppercase">
+                    <a href="#rankings" class="btn-orange-glow px-6 py-3.5 rounded-xl text-slate-950 font-black text-xs flex items-center gap-2 font-subheading uppercase">
                         <i class="fa-solid fa-trophy"></i> BẢNG XẾP HẠNG <i class="fa-solid fa-arrow-right ml-1"></i>
                     </a>
-                    <button onclick="copyIP()" class="btn-green-glow px-5 py-3.5 rounded-xl font-bold text-xs flex items-center gap-2 font-subheading cursor-pointer">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> vuamc.net <i class="fa-regular fa-copy text-xs"></i>
-                    </button>
+                    <a href="https://discord.gg/7yyrf23kh" target="_blank" class="px-5 py-3.5 rounded-xl glass-panel hover:bg-white/10 text-white border border-cyber-border font-bold text-xs flex items-center gap-2 font-subheading">
+                        <i class="fa-brands fa-discord text-indigo-400 text-sm"></i> ĐĂNG KÝ TEST <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400"></i>
+                    </a>
                 </div>
             </div>
 
             <!-- Champion Card -->
-            <div class="lg:col-span-5 reveal" style="transition-delay: 0.2s;">
-                <div id="championDisplayCard" onclick="openProfileModal(currentChampId)" class="champion-card rounded-3xl p-6 md:p-8 relative overflow-hidden backdrop-blur-2xl cursor-pointer hover:border-amber-400/70 group transition-all">
+            <div class="lg:col-span-5 reveal">
+                <div id="championDisplayCard" onclick="openProfileModal(currentChampId)" class="champion-card rounded-3xl p-6 md:p-8 relative overflow-hidden backdrop-blur-2xl cursor-pointer hover:border-amber-400/70 group">
                     <div class="flex items-center justify-between mb-6">
-                        <div class="flex items-center gap-2 text-xs font-black text-amber-400 uppercase font-subheading tracking-wider">
+                        <div class="flex items-center gap-2 text-xs font-black text-amber-400 uppercase font-subheading">
                             <i class="fa-solid fa-crown text-amber-400 text-base"></i> Quán Quân Hiện Tại
                         </div>
                         <span class="px-3 py-1 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-400 text-[10px] font-black font-subheading">#1 OVERALL</span>
                     </div>
                     <div class="text-center my-4">
                         <div class="relative inline-block">
-                            <div class="w-24 h-24 rounded-2xl p-1 bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-300 shadow-2xl mx-auto group-hover:scale-105 transition-transform duration-300">
+                            <div class="w-24 h-24 rounded-2xl p-1 bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-300 shadow-2xl mx-auto group-hover:scale-105 transition-transform">
                                 <img id="champAvatar" src="https://mc-heads.net/avatar/Marlowww/96" class="w-full h-full rounded-xl bg-cyber-bg object-cover" alt="Champion Avatar">
                             </div>
+                            <span class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 text-[9px] font-black px-3 py-0.5 rounded-full uppercase font-subheading">CHAMPION</span>
                         </div>
-                        <h2 id="champName" class="text-2xl font-black text-white font-subheading mt-4 tracking-wide">Marlowww</h2>
+                        <h2 id="champName" class="text-2xl font-black text-white font-subheading mt-4">Marlowww</h2>
                         <p id="champTitle" class="text-xs text-amber-400 font-bold font-subheading"><i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>PKM Challenger</p>
                     </div>
                     <div class="bg-cyber-bg/90 border border-cyber-border rounded-2xl p-3 text-center my-4">
-                        <span class="text-xs text-gray-400 font-bold font-subheading uppercase mr-2"><i class="fa-solid fa-bolt text-amber-400 mr-1"></i>Tổng điểm:</span>
+                        <span class="text-xs text-gray-400 font-bold uppercase mr-2"><i class="fa-solid fa-bolt text-amber-400 mr-1"></i>Tổng điểm:</span>
                         <span id="champPoints" class="text-lg font-black text-amber-400 font-subheading">180 ĐIỂM</span>
                     </div>
-                    <div id="champTiersList" class="flex flex-wrap gap-1.5"></div>
+                    <div class="space-y-2 pt-1">
+                        <div class="text-[10px] font-extrabold text-gray-400 uppercase font-subheading">Danh Hiệu Bậc Tier:</div>
+                        <div id="champTiersList" class="flex flex-wrap gap-1.5"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -224,7 +198,7 @@
                 <div>
                     <div class="flex items-center justify-between mb-6">
                         <span class="text-xs font-black tracking-widest text-gray-400 uppercase font-subheading">MODES LEADERBOARD</span>
-                        <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-[10px] font-black font-subheading">4 Chế Độ</span>
+                        <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-[10px] font-black">4 Chế Độ</span>
                     </div>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
                         <div onclick="switchMode('1vs1')" id="card-mode-1vs1" class="mode-card-item">
@@ -251,7 +225,7 @@
                 <div>
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-xs font-black tracking-widest text-gray-400 uppercase font-subheading">TESTING FLOW</span>
-                        <span id="flowStepCount" class="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300 text-[10px] font-bold font-subheading">1/4</span>
+                        <span id="flowStepCount" class="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300 text-[10px] font-bold">1/4</span>
                     </div>
                     <h3 class="text-xl font-black text-white font-subheading mb-4">Quy trình Test chi tiết</h3>
                     <div class="bg-cyber-bg/90 border border-cyber-border rounded-2xl p-6 text-center relative min-h-[190px] flex flex-col items-center justify-center">
@@ -277,11 +251,11 @@
 
         <div class="glass-panel rounded-2xl p-3 mb-6 flex flex-col lg:flex-row items-center justify-between gap-4 shadow-xl">
             <div class="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-1 lg:pb-0">
-                <button onclick="switchMode('overall')" id="btn-overall" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-extrabold bg-amber-500 text-slate-950 flex items-center gap-2 cursor-pointer font-subheading shadow-lg shadow-amber-500/25"><i class="fa-solid fa-crown"></i> Overall</button>
-                <button onclick="switchMode('1vs1')" id="btn-1vs1" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 cursor-pointer font-subheading"><i class="fa-solid fa-crosshairs text-red-400"></i> 1vs1</button>
-                <button onclick="switchMode('2vs2')" id="btn-2vs2" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 cursor-pointer font-subheading"><i class="fa-solid fa-hand-fist text-amber-400"></i> 2vs2</button>
-                <button onclick="switchMode('3vs3')" id="btn-3vs3" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 cursor-pointer font-subheading"><i class="fa-solid fa-shield-halved text-emerald-400"></i> 3vs3</button>
-                <button onclick="switchMode('4vs4')" id="btn-4vs4" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 cursor-pointer font-subheading"><i class="fa-solid fa-users-rays text-blue-400"></i> 4vs4</button>
+                <button onclick="switchMode('overall')" id="btn-overall" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-extrabold bg-amber-500 text-slate-950 flex items-center gap-2 font-subheading shadow-lg shadow-amber-500/25 cursor-pointer"><i class="fa-solid fa-crown"></i> Overall</button>
+                <button onclick="switchMode('1vs1')" id="btn-1vs1" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg text-gray-300 flex items-center gap-2 font-subheading cursor-pointer"><i class="fa-solid fa-crosshairs text-red-400"></i> 1vs1</button>
+                <button onclick="switchMode('2vs2')" id="btn-2vs2" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg text-gray-300 flex items-center gap-2 font-subheading cursor-pointer"><i class="fa-solid fa-hand-fist text-amber-400"></i> 2vs2</button>
+                <button onclick="switchMode('3vs3')" id="btn-3vs3" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg text-gray-300 flex items-center gap-2 font-subheading cursor-pointer"><i class="fa-solid fa-shield-halved text-emerald-400"></i> 3vs3</button>
+                <button onclick="switchMode('4vs4')" id="btn-4vs4" class="mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg text-gray-300 flex items-center gap-2 font-subheading cursor-pointer"><i class="fa-solid fa-users-rays text-blue-400"></i> 4vs4</button>
             </div>
 
             <div class="flex items-center gap-3 w-full lg:w-auto">
@@ -290,13 +264,13 @@
                     <input type="text" id="searchInput" oninput="renderTable()" placeholder="Tìm tên tuyển thủ..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
                 </div>
 
-                <!-- Admin & Tester Controls -->
-                <div id="adminControls" class="hidden items-center gap-2 min-w-max">
+                <!-- Admin / Tester Quick Controls -->
+                <div id="adminControls" class="hidden min-w-max flex items-center gap-2">
                     <button onclick="openPlayerModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-600/25 flex items-center gap-1.5 font-subheading cursor-pointer">
                         <i class="fa-solid fa-user-plus"></i> Thêm Player
                     </button>
-                    <button id="adminPanelBtn" onclick="openAdminModal()" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-indigo-600/25 flex items-center gap-1.5 font-subheading cursor-pointer">
-                        <i class="fa-solid fa-user-gear"></i> Quản Trị User
+                    <button id="manageRolesBtn" onclick="openRoleManagerModal()" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs px-3.5 py-2.5 rounded-xl shadow-lg flex items-center gap-1.5 font-subheading cursor-pointer">
+                        <i class="fa-solid fa-user-shield"></i> Phân Quyền
                     </button>
                 </div>
             </div>
@@ -320,11 +294,11 @@
 
                 <div class="md:col-span-8 space-y-4">
                     <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 text-center">
-                        <span class="text-xs text-gray-400 font-bold font-subheading uppercase block mb-1">TỔNG ĐIỂM XẾP HẠNG</span>
+                        <span class="text-xs text-gray-400 font-bold uppercase block mb-1">TỔNG ĐIỂM XẾP HẠNG</span>
                         <span id="profilePoints" class="text-3xl font-black text-amber-400 font-subheading">180 ĐIỂM</span>
                     </div>
                     <div>
-                        <div class="text-xs font-black text-gray-400 uppercase tracking-wider font-subheading mb-2">BẬC TIER CÁC THỂ THỨC:</div>
+                        <div class="text-xs font-black text-gray-400 uppercase font-subheading mb-2">BẬC TIER CÁC THỂ THỨC:</div>
                         <div id="profileTiersGrid" class="grid grid-cols-2 gap-2"></div>
                     </div>
                 </div>
@@ -342,267 +316,414 @@
         </div>
     </div>
 
-    <!-- Auth Modal (Đăng ký / Đăng nhập) -->
-    <div id="authModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="glass-panel border border-cyber-border w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
-            <h3 id="authModalTitle" class="text-xl font-bold text-white mb-4 font-subheading flex items-center gap-2"><i class="fa-solid fa-user-shield text-amber-400"></i> Đăng Nhập Hệ Thống</h3>
+    <!-- Auth Modal (Đăng Nhập / Đăng Ký) -->
+    <div id="authModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-[110] flex items-center justify-center p-4">
+        <div class="glass-panel border border-cyber-border w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
+            <button onclick="closeAuthModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
             
-            <div class="space-y-3 mb-5">
-                <div>
-                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tên Tài Khoản:</label>
-                    <input type="text" id="authUsername" placeholder="Nhập tên tài khoản..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
-                </div>
-                <div>
-                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Mật Khẩu:</label>
-                    <input type="password" id="authPassword" placeholder="Nhập mật khẩu..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
-                </div>
+            <div class="flex items-center justify-center gap-4 mb-6 border-b border-cyber-border pb-4">
+                <button onclick="switchAuthTab('login')" id="authTabLoginBtn" class="text-base font-black text-amber-400 font-subheading pb-1 border-b-2 border-amber-400">Đăng Nhập</button>
+                <button onclick="switchAuthTab('register')" id="authTabRegBtn" class="text-base font-bold text-gray-400 font-subheading pb-1 border-b-2 border-transparent">Đăng Ký</button>
             </div>
 
-            <button onclick="handleAuthSubmit()" class="w-full btn-orange-glow text-slate-950 font-black py-3 rounded-xl text-sm font-subheading cursor-pointer uppercase tracking-wider">Xác Nhận</button>
+            <!-- Login Form -->
+            <div id="loginFormContainer" class="space-y-4">
+                <div>
+                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tên tài khoản / Ingame</label>
+                    <input type="text" id="loginUsername" placeholder="Nhập tên đăng nhập..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Mật khẩu</label>
+                    <input type="password" id="loginPassword" placeholder="Nhập mật khẩu..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400" onkeyup="if(event.key==='Enter') submitLogin()">
+                </div>
+                <button onclick="submitLogin()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider font-subheading shadow-lg shadow-amber-500/25 cursor-pointer mt-2">Đăng Nhập Ngay</button>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerFormContainer" class="space-y-4 hidden">
+                <div>
+                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tên tài khoản / Ingame Minecraft *</label>
+                    <input type="text" id="regUsername" placeholder="Ví dụ: Marlowww" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Mật khẩu *</label>
+                    <input type="password" id="regPassword" placeholder="Tạo mật khẩu bảo mật..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
+                </div>
+                <button onclick="submitRegister()" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider font-subheading shadow-lg shadow-emerald-500/25 cursor-pointer mt-2">Đăng Ký Tài Khoản</button>
+            </div>
         </div>
     </div>
 
-    <!-- Admin Panel Modal (Dành riêng cho Admin qthangql quản lý user) -->
-    <div id="adminModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="glass-panel border border-cyber-border w-full max-w-2xl rounded-3xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeAdminModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="text-xl font-black text-white mb-4 font-subheading flex items-center gap-2">
-                <i class="fa-solid fa-user-gear text-indigo-400"></i> Quản Trị Thành Viên & Phân Quyền
-            </h3>
-            <p class="text-xs text-gray-400 mb-4">Thay đổi quyền hạn của các tài khoản đăng ký (Member thành Tester để có quyền chỉnh sửa).</p>
+    <!-- Role Manager Modal (Admin Chỉ định Tester) -->
+    <div id="roleManagerModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-[115] flex items-center justify-center p-4">
+        <div class="glass-panel border border-cyber-border w-full max-w-xl rounded-3xl p-6 shadow-2xl relative">
+            <button onclick="closeRoleManagerModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
+            <h3 class="text-lg font-bold text-white mb-2 font-subheading flex items-center gap-2"><i class="fa-solid fa-user-shield text-indigo-400"></i> Quản Lý Phân Quyền Thành Viên</h3>
+            <p class="text-xs text-gray-400 mb-4">Chỉ định quyền Tester hoặc Thành viên cho các tài khoản đang hoạt động.</p>
+            <div id="roleListContainer" class="space-y-2 max-h-[60vh] overflow-y-auto pr-1"></div>
+        </div>
+    </div>
+
+    <!-- Player Form Admin/Tester Modal -->
+    <div id="playerModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-[100] flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel border border-cyber-border w-full max-w-3xl rounded-2xl p-6 shadow-2xl relative my-auto">
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-cyber-border">
+                <h3 class="text-xl font-bold text-white font-subheading flex items-center gap-2"><i class="fa-solid fa-user-pen text-emerald-400"></i>Quản Lý / Chấm Điểm Tuyển Thủ</h3>
+                <button type="button" onclick="closePlayerModal()" class="w-8 h-8 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
+            </div>
+
+            <input type="hidden" id="editingPlayerId" value="">
+
+            <div class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tên Ingame Minecraft *</label>
+                        <input type="text" id="playerFormName" placeholder="Ví dụ: Marlowww" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-amber-400 mb-1 block font-subheading">Rank PKM (Tự Động)</label>
+                        <input type="text" id="playerFormTitle" readonly class="w-full bg-cyber-bg border border-amber-500/40 rounded-xl px-3 py-2.5 text-amber-400 font-bold text-sm cursor-not-allowed" value="PKM Challenger">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Khu vực</label>
+                        <input type="text" id="playerFormRegion" value="VN" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-white text-sm">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-amber-400 mb-1 block font-subheading">Tổng Điểm Tự Động</label>
+                        <input type="number" id="playerFormPoints" readonly class="w-full bg-cyber-bg border border-amber-500/40 rounded-xl px-3 py-2.5 text-amber-400 font-bold text-sm cursor-not-allowed" value="0">
+                    </div>
+                </div>
+
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-3">
+                    <label class="text-xs font-black text-blue-400 mb-1 block uppercase font-subheading"><i class="fa-solid fa-user-group mr-1"></i> Đồng đội đi cùng Mode 4vs4</label>
+                    <input type="text" id="playerFormTeammate4v4" placeholder="Nhập tên Tuyển thủ đi cùng" class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3 py-2 text-xs text-white">
+                </div>
+
+                <div class="border-t border-cyber-border pt-4">
+                    <label class="text-xs font-black text-amber-400 mb-2 block uppercase font-subheading"><i class="fa-solid fa-layer-group mr-1.5"></i> Thiết Lập Bậc Tier</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div class="flex items-center justify-between bg-cyber-bg p-2.5 rounded-xl border border-cyber-border">
+                            <span class="text-xs font-bold text-gray-200">1vs1:</span>
+                            <select id="tier_1vs1" onchange="calculateAutoPointsAndRank()" class="tier-select bg-cyber-card border border-cyber-border rounded-lg px-2 py-1.5 text-xs text-white"></select>
+                        </div>
+                        <div class="flex items-center justify-between bg-cyber-bg p-2.5 rounded-xl border border-cyber-border">
+                            <span class="text-xs font-bold text-gray-200">2vs2:</span>
+                            <select id="tier_2vs2" onchange="calculateAutoPointsAndRank()" class="tier-select bg-cyber-card border border-cyber-border rounded-lg px-2 py-1.5 text-xs text-white"></select>
+                        </div>
+                        <div class="flex items-center justify-between bg-cyber-bg p-2.5 rounded-xl border border-cyber-border">
+                            <span class="text-xs font-bold text-gray-200">3vs3:</span>
+                            <select id="tier_3vs3" onchange="calculateAutoPointsAndRank()" class="tier-select bg-cyber-card border border-cyber-border rounded-lg px-2 py-1.5 text-xs text-white"></select>
+                        </div>
+                        <div class="flex items-center justify-between bg-cyber-bg p-2.5 rounded-xl border border-cyber-border">
+                            <span class="text-xs font-bold text-gray-200">4vs4:</span>
+                            <select id="tier_4vs4" onchange="calculateAutoPointsAndRank()" class="tier-select bg-cyber-card border border-cyber-border rounded-lg px-2 py-1.5 text-xs text-white"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Đội hình Pokémon -->
+                <div class="border-t border-cyber-border pt-4 space-y-3">
+                    <label class="text-xs font-black text-amber-400 block uppercase font-subheading"><i class="fa-solid fa-dragon mr-1.5"></i> Nhập Đội Hình Pokémon (6 con mỗi mode)</label>
+                    <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
+                        <span class="text-xs font-bold text-red-400 block mb-2">Đội hình 1vs1:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
+                            <input type="text" id="poke_1v1_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_1v1_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                        </div>
+                    </div>
+                    <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
+                        <span class="text-xs font-bold text-amber-400 block mb-2">Đội hình 2vs2:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
+                            <input type="text" id="poke_2v2_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_2v2_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                        </div>
+                    </div>
+                    <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
+                        <span class="text-xs font-bold text-emerald-400 block mb-2">Đội hình 3vs3:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
+                            <input type="text" id="poke_3v3_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_3v3_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                        </div>
+                    </div>
+                    <div class="bg-cyber-bg p-3 rounded-xl border border-cyber-border">
+                        <span class="text-xs font-bold text-blue-400 block mb-2">Đội hình 4vs4:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
+                            <input type="text" id="poke_4v4_0" placeholder="Pk 1" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_1" placeholder="Pk 2" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_2" placeholder="Pk 3" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_3" placeholder="Pk 4" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_4" placeholder="Pk 5" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                            <input type="text" id="poke_4v4_5" placeholder="Pk 6" class="bg-cyber-card border border-cyber-border rounded-lg p-2 text-xs text-white">
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="border-b border-cyber-border text-xs text-gray-400 font-subheading">
-                            <th class="py-3 px-3">Tài khoản</th>
-                            <th class="py-3 px-3">Vai trò hiện tại</th>
-                            <th class="py-3 px-3 text-center">Thao tác đổi quyền</th>
-                        </tr>
-                    </thead>
-                    <tbody id="userManagementTableBody"></tbody>
-                </table>
+            <div class="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-cyber-border">
+                <button type="button" onclick="closePlayerModal()" class="px-5 py-2.5 rounded-xl bg-white/5 text-gray-300 text-xs font-bold cursor-pointer">Hủy</button>
+                <button type="button" onclick="savePlayer()" class="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black shadow-lg shadow-emerald-500/25 cursor-pointer">Lưu Tuyển Thủ</button>
             </div>
         </div>
     </div>
 
-    <!-- Add/Edit Player Modal -->
-    <div id="playerModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="glass-panel border border-cyber-border w-full max-w-lg rounded-3xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closePlayerModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-cyber-bg border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
-            <h3 id="playerModalTitle" class="text-xl font-black text-white mb-4 font-subheading flex items-center gap-2">
-                <i class="fa-solid fa-user-plus text-emerald-400"></i> Thêm Tuyển Thủ Mới
-            </h3>
-            <div class="space-y-3 mb-5">
-                <div>
-                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tên Minecraft:</label>
-                    <input type="text" id="inputPlayerName" placeholder="Ví dụ: Marlowww" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
-                </div>
-                <div>
-                    <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Danh Hiệu:</label>
-                    <input type="text" id="inputPlayerTitle" placeholder="Ví dụ: PKM Challenger" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tier 1vs1:</label>
-                        <select id="inputTier1v1" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-amber-400">
-                            <option value="HT1">HT1</option><option value="LT1">LT1</option><option value="HT2">HT2</option><option value="LT2">LT2</option><option value="HT3">HT3</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tier 2vs2:</label>
-                        <select id="inputTier2v2" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-amber-400">
-                            <option value="HT1">HT1</option><option value="LT1">LT1</option><option value="HT2">HT2</option><option value="LT2">LT2</option><option value="HT3">HT3</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tier 3vs3:</label>
-                        <select id="inputTier3v3" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-amber-400">
-                            <option value="HT1">HT1</option><option value="LT1">LT1</option><option value="HT2">HT2</option><option value="LT2">LT2</option><option value="HT3">HT3</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-gray-400 mb-1 block font-subheading">Tier 4vs4:</label>
-                        <select id="inputTier4v4" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-amber-400">
-                            <option value="HT1">HT1</option><option value="LT1">LT1</option><option value="HT2">HT2</option><option value="LT2">LT2</option><option value="HT3">HT3</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <button onclick="savePlayer()" class="w-full btn-orange-glow text-slate-950 font-black py-3 rounded-xl text-sm font-subheading cursor-pointer uppercase tracking-wider">Lưu Tuyển Thủ</button>
-        </div>
-    </div>
-
+    <!-- Script JS -->
     <script>
-        // --- KHỞI TẠO TÀI KHOẢN ADMIN MẶC ĐỊNH ---
-        let users = JSON.parse(localStorage.getItem('vc_users')) || [
-            { username: 'qthangql', password: 'Dung12345D', role: 'admin' }
-        ];
-        let currentUser = JSON.parse(localStorage.getItem('vc_current_user')) || null;
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                    else entry.target.classList.remove('active');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
 
-        // --- DỮ LIỆU PLAYERS ---
-        let players = JSON.parse(localStorage.getItem('vc_players')) || [
-            { id: 1, name: 'Marlowww', title: 'PKM Challenger', region: 'VN', points: 180, tiers: { '1vs1': 'HT1', '2vs2': 'HT1', '3vs3': 'LT1', '4vs4': 'HT2' }, team: { '1vs1': ['Charizard', 'Pikachu', 'Lucario', 'Garchomp', 'Snorlax', 'Greninja'], '2vs2': ['Charizard', 'Pikachu', 'Lucario', 'Garchomp', 'Snorlax', 'Greninja'], '3vs3': ['Charizard', 'Pikachu', 'Lucario', 'Garchomp', 'Snorlax', 'Greninja'], '4vs4': ['Charizard', 'Pikachu', 'Lucario', 'Garchomp', 'Snorlax', 'Greninja'] } },
-            { id: 2, name: 'TuanProVN', title: 'Master Trainer', region: 'VN', points: 155, tiers: { '1vs1': 'LT1', '2vs2': 'HT2', '3vs3': 'HT1', '4vs4': 'LT2' }, team: { '1vs1': ['Dragonite', 'Mewtwo', 'Tyranitar', 'Metagross', 'Gengar', 'Togekiss'], '2vs2': ['Dragonite', 'Mewtwo', 'Tyranitar', 'Metagross', 'Gengar', 'Togekiss'], '3vs3': ['Dragonite', 'Mewtwo', 'Tyranitar', 'Metagross', 'Gengar', 'Togekiss'], '4vs4': ['Dragonite', 'Mewtwo', 'Tyranitar', 'Metagross', 'Gengar', 'Togekiss'] } },
-            { id: 3, name: 'CobbleKing', title: 'Elite Four', region: 'VN', points: 130, tiers: { '1vs1': 'HT2', '2vs2': 'LT1', '3vs3': 'LT2', '4vs4': 'HT1' }, team: { '1vs1': ['Infernape', 'Garchomp', 'Lucario', 'Gardevoir', 'Swampert', 'Scizor'], '2vs2': ['Infernape', 'Garchomp', 'Lucario', 'Gardevoir', 'Swampert', 'Scizor'], '3vs3': ['Infernape', 'Garchomp', 'Lucario', 'Gardevoir', 'Swampert', 'Scizor'], '4vs4': ['Infernape', 'Garchomp', 'Lucario', 'Gardevoir', 'Swampert', 'Scizor'] } }
+        // HỆ THỐNG USERS & AUTH & ROLES
+        let currentUser = JSON.parse(localStorage.getItem('vctiers_current_user')) || null;
+        let usersList = JSON.parse(localStorage.getItem('vctiers_users_db')) || [
+            { username: 'qthangql', password: 'Dung12345D', role: 'admin' }
         ];
 
         let currentMode = 'overall';
-        let currentChampId = 1;
-        let authMode = 'login'; // 'login' hoặc 'register'
+        let currentChampId = '1';
+        let activeProfilePlayer = null;
+        let activeTeamTab = '1vs1';
+        let currentFlowStep = 1;
 
-        // --- HỆ THỐNG XÁC THỰC (AUTH) ---
-        function openAuthModal(mode) {
-            authMode = mode;
-            const titleElem = document.getElementById('authModalTitle');
-            if(mode === 'login') {
-                titleElem.innerHTML = `<i class="fa-solid fa-right-to-bracket text-amber-400"></i> Đăng Nhập Hệ Thống`;
-            } else {
-                titleElem.innerHTML = `<i class="fa-solid fa-user-plus text-amber-400"></i> Đăng Ký Tài Khoản Mới`;
+        const flowSteps = [
+            { step: 1, icon: 'fa-brands fa-discord text-indigo-400', title: 'Tham gia Discord', desc: 'Truy cập Server Discord chính thức tại <a href="https://discord.gg/7yyrf23kh" target="_blank" class="text-indigo-400 underline font-bold">discord.gg/7yyrf23kh</a> để nhận hỗ trợ.' },
+            { step: 2, icon: 'fa-solid fa-clipboard-list text-amber-400', title: 'Tạo Ticket Đăng Ký', desc: 'Mở Ticket tại kênh #dang-ky-test và điền đầy đủ Ingame Minecraft & Thể thức tham gia.' },
+            { step: 3, icon: 'fa-solid fa-gamepad text-emerald-400', title: 'Thi Đấu Đánh Giá Tier', desc: 'Gặp Tester được phân công tại máy chủ vuamc.net để tiến hành trận đấu PvP thử nghiệm.' },
+            { step: 4, icon: 'fa-solid fa-award text-blue-400', title: 'Cập Nhật Xếp Hạng', desc: 'Kết quả thử nghiệm sẽ được cập nhật trực tiếp lên hệ thống VC Tiers trong vòng 24h.' }
+        ];
+
+        function renderFlowStep() {
+            const data = flowSteps[currentFlowStep - 1];
+            document.getElementById('flowStepCount').innerText = `${data.step}/4`;
+            document.getElementById('flowStepContent').innerHTML = `
+                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl mx-auto"><i class="${data.icon}"></i></div>
+                <div class="text-[10px] font-black text-amber-400 uppercase tracking-widest font-subheading">BƯỚC 0${data.step}</div>
+                <h4 class="text-base font-black text-white font-subheading">${data.title}</h4>
+                <p class="text-xs text-gray-400 leading-relaxed max-w-sm mx-auto">${data.desc}</p>
+            `;
+        }
+        function nextStep() { currentFlowStep = currentFlowStep >= 4 ? 1 : currentFlowStep + 1; renderFlowStep(); }
+        function prevStep() { currentFlowStep = currentFlowStep <= 1 ? 4 : currentFlowStep - 1; renderFlowStep(); }
+
+        const TIER_POINTS = { 'HT1': 60, 'LT1': 45, 'HT2': 30, 'LT2': 20, 'HT3': 10, 'LT3': 6, 'HT4': 4, 'LT4': 3, 'HT5': 2, 'LT5': 1 };
+        const tierOptions = ['HT1', 'LT1', 'HT2', 'LT2', 'HT3', 'LT3', 'HT4', 'LT4', 'HT5', 'LT5'];
+        const MODE_ICONS = {
+            '1vs1': { icon: 'fa-solid fa-crosshairs', color: 'text-red-400' },
+            '2vs2': { icon: 'fa-solid fa-hand-fist', color: 'text-amber-400' },
+            '3vs3': { icon: 'fa-solid fa-shield-halved', color: 'text-emerald-400' },
+            '4vs4': { icon: 'fa-solid fa-users-rays', color: 'text-blue-400' }
+        };
+
+        function getPokemonSpriteUrl(pokeName) {
+            if (!pokeName) return '';
+            const clean = pokeName.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+            return `https://play.pokemonshowdown.com/sprites/gen5/${clean}.png`;
+        }
+
+        function populateTierSelects() {
+            document.querySelectorAll('.tier-select').forEach(select => {
+                select.innerHTML = '<option value="">-- Không xếp hạng --</option>';
+                tierOptions.forEach(t => { select.innerHTML += `<option value="${t}">${t} (+${TIER_POINTS[t]} pts)</option>`; });
+            });
+        }
+
+        function calculateAutoPointsAndRank() {
+            const r1 = document.getElementById('tier_1vs1').value;
+            const r2 = document.getElementById('tier_2vs2').value;
+            const r3 = document.getElementById('tier_3vs3').value;
+            const r4 = document.getElementById('tier_4vs4').value;
+            let total = 0;
+            if (r1 && TIER_POINTS[r1]) total += TIER_POINTS[r1];
+            if (r2 && TIER_POINTS[r2]) total += TIER_POINTS[r2];
+            if (r3 && TIER_POINTS[r3]) total += TIER_POINTS[r3];
+            if (r4 && TIER_POINTS[r4]) total += TIER_POINTS[r4];
+            document.getElementById('playerFormPoints').value = total;
+
+            let autoRank = 'PKM Expert';
+            if (total >= 180) autoRank = 'PKM Challenger';
+            else if (total >= 120) autoRank = 'PKM Grandmaster';
+            else if (total >= 80) autoRank = 'PKM Master';
+            else if (total >= 40) autoRank = 'PKM Elite';
+            document.getElementById('playerFormTitle').value = autoRank;
+        }
+
+        const defaultPlayers = [
+            {
+                id: '1', name: 'Marlowww', title: 'PKM Challenger', region: 'VN', points: 180, teammate4v4: 'ItzRealMe',
+                teams: {
+                    '1vs1': ['Rayquaza', 'Charizard', 'Lucario', 'Mewtwo', 'Dialga', 'Palkia'],
+                    '2vs2': ['Garchomp', 'Tyranitar', 'Zapdos', 'Dragonite', 'Metagross', 'Greninja'],
+                    '3vs3': ['Dragonite', 'Metagross', 'Greninja', 'Rayquaza', 'Charizard', 'Lucario'],
+                    '4vs4': ['Arceus', 'Mewtwo', 'Rayquaza', 'Giratina', 'Dialga', 'Palkia']
+                },
+                tiers: [{ mode: '1vs1', rank: 'HT1' }, { mode: '2vs2', rank: 'HT1' }, { mode: '3vs3', rank: 'HT1' }, { mode: '4vs4', rank: 'HT1' }]
             }
-            document.getElementById('authUsername').value = '';
-            document.getElementById('authPassword').value = '';
+        ];
+
+        let players = JSON.parse(localStorage.getItem('vctiers_players_v20')) || defaultPlayers;
+        function saveToLocalStorage() { localStorage.setItem('vctiers_players_v20', JSON.stringify(players)); }
+
+        // AUTH & MODAL FUNCTIONS
+        function openAuthModal(tab) {
+            switchAuthTab(tab);
             document.getElementById('authModal').classList.remove('hidden');
         }
-
-        function closeAuthModal() {
-            document.getElementById('authModal').classList.add('hidden');
-        }
-
-        function handleAuthSubmit() {
-            const u = document.getElementById('authUsername').value.trim();
-            const p = document.getElementById('authPassword').value.trim();
-            if(!u || !p) { alert('Vui lòng điền đầy đủ tên tài khoản và mật khẩu!'); return; }
-
-            if(authMode === 'register') {
-                // Kiểm tra trùng tên
-                if(users.some(x => x.username === u)) {
-                    alert('Tên tài khoản này đã tồn tại!'); return;
-                }
-                // Đăng ký mới mặc định là 'member'
-                const newUser = { username: u, password: p, role: 'member' };
-                users.push(newUser);
-                localStorage.setItem('vc_users', JSON.stringify(users));
-                alert('Đăng ký thành công! Hãy đăng nhập bằng tài khoản vừa tạo.');
-                closeAuthModal();
-                openAuthModal('login');
+        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
+        function switchAuthTab(tab) {
+            const loginBtn = document.getElementById('authTabLoginBtn');
+            const regBtn = document.getElementById('authTabRegBtn');
+            const loginBox = document.getElementById('loginFormContainer');
+            const regBox = document.getElementById('registerFormContainer');
+            if(tab === 'login') {
+                loginBtn.className = "text-base font-black text-amber-400 font-subheading pb-1 border-b-2 border-amber-400";
+                regBtn.className = "text-base font-bold text-gray-400 font-subheading pb-1 border-b-2 border-transparent";
+                loginBox.classList.remove('hidden'); regBox.classList.add('hidden');
             } else {
-                // Đăng nhập
-                const found = users.find(x => x.username === u && x.password === p);
-                if(found) {
-                    currentUser = found;
-                    localStorage.setItem('vc_current_user', JSON.stringify(currentUser));
-                    closeAuthModal();
-                    updateAuthUI();
-                    renderTable();
-                    alert(`Đăng nhập thành công với tư cách ${found.role.toUpperCase()}: ${found.username}`);
-                } else {
-                    alert('Sai tên tài khoản hoặc mật khẩu!');
-                }
+                regBtn.className = "text-base font-black text-emerald-400 font-subheading pb-1 border-b-2 border-emerald-400";
+                loginBtn.className = "text-base font-bold text-gray-400 font-subheading pb-1 border-b-2 border-transparent";
+                regBox.classList.remove('hidden'); loginBox.classList.add('hidden');
             }
         }
 
-        function handleLogout() {
-            currentUser = null;
-            localStorage.removeItem('vc_current_user');
-            updateAuthUI();
-            renderTable();
-            alert('Đã đăng xuất tài khoản!');
+        function submitRegister() {
+            const u = document.getElementById('regUsername').value.trim();
+            const p = document.getElementById('regPassword').value.trim();
+            if(!u || !p) { alert("Vui lòng điền đầy đủ thông tin đăng ký!"); return; }
+            if(usersList.some(x => x.username.toLowerCase() === u.toLowerCase())) { alert("Tên tài khoản này đã tồn tại!"); return; }
+
+            usersList.push({ username: u, password: p, role: 'member' });
+            localStorage.setItem('vctiers_users_db', JSON.stringify(usersList));
+            alert("Đăng ký thành công! Hãy đăng nhập ngay.");
+            switchAuthTab('login');
         }
 
-        function updateAuthUI() {
-            const authContainer = document.getElementById('authContainer');
-            const userProfileBadge = document.getElementById('userProfileBadge');
+        function submitLogin() {
+            const u = document.getElementById('loginUsername').value.trim();
+            const p = document.getElementById('loginPassword').value.trim();
+            const found = usersList.find(x => x.username.toLowerCase() === u.toLowerCase() && x.password === p);
+            if(found) {
+                currentUser = found;
+                localStorage.setItem('vctiers_current_user', JSON.stringify(currentUser));
+                closeAuthModal();
+                updateUIAuth();
+                renderTable();
+                alert(`Đăng nhập thành công với quyền: ${found.role.toUpperCase()}`);
+            } else {
+                alert("Sai tên tài khoản hoặc mật khẩu!");
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('vctiers_current_user');
+            updateUIAuth();
+            renderTable();
+            alert("Đã đăng xuất tài khoản.");
+        }
+
+        function updateUIAuth() {
+            const area = document.getElementById('authNavArea');
             const adminControls = document.getElementById('adminControls');
-            const adminPanelBtn = document.getElementById('adminPanelBtn');
+            const manageRolesBtn = document.getElementById('manageRolesBtn');
 
             if(currentUser) {
-                authContainer.classList.add('hidden');
-                userProfileBadge.classList.remove('hidden');
-                userProfileBadge.classList.add('flex');
-                
-                document.getElementById('currentUsernameDisplay').innerText = currentUser.username;
-                const roleDisp = document.getElementById('currentUserRoleDisplay');
-                roleDisp.innerText = currentUser.role.toUpperCase();
-
-                // Phân quyền hiển thị nút Quản lý
-                if(currentUser.role === 'admin' || currentUser.role === 'tester') {
-                    adminControls.classList.remove('hidden');
-                    adminControls.classList.add('flex');
-                } else {
-                    adminControls.classList.add('hidden');
-                }
-
-                if(currentUser.role === 'admin') {
-                    adminPanelBtn.classList.remove('hidden');
-                } else {
-                    adminPanelBtn.classList.add('hidden');
-                }
+                let badgeColor = currentUser.role === 'admin' ? 'bg-amber-500 text-slate-950' : currentUser.role === 'tester' ? 'bg-indigo-500 text-white' : 'bg-white/10 text-gray-300';
+                area.innerHTML = `
+                    <div class="flex items-center gap-2 bg-cyber-card border border-cyber-border px-3 py-1.5 rounded-xl">
+                        <span class="text-xs font-black text-white font-subheading">${currentUser.username}</span>
+                        <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md ${badgeColor}">${currentUser.role}</span>
+                        <button onclick="logout()" class="text-red-400 hover:text-red-300 text-xs ml-2 cursor-pointer" title="Đăng xuất"><i class="fa-solid fa-power-off"></i></button>
+                    </div>
+                `;
+                const canManage = (currentUser.role === 'admin' || currentUser.role === 'tester');
+                adminControls.classList.toggle('hidden', !canManage);
+                manageRolesBtn.classList.toggle('hidden', currentUser.role !== 'admin');
             } else {
-                authContainer.classList.remove('hidden');
-                userProfileBadge.classList.remove('flex');
-                userProfileBadge.classList.add('hidden');
+                area.innerHTML = `
+                    <button onclick="openAuthModal('login')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs px-4 py-2 rounded-xl transition-all flex items-center gap-1.5 font-subheading shadow-lg shadow-amber-500/25 cursor-pointer">
+                        <i class="fa-solid fa-right-to-bracket"></i> Đăng Nhập
+                    </button>
+                `;
                 adminControls.classList.add('hidden');
-                adminPanelBtn.classList.add('hidden');
+                manageRolesBtn.classList.add('hidden');
             }
         }
 
-        // --- QUẢN TRỊ USER (ADMIN PANEL) ---
-        function openAdminModal() {
-            const tbody = document.getElementById('userManagementTableBody');
-            tbody.innerHTML = '';
-            users.forEach(usr => {
-                let tr = document.createElement('tr');
-                tr.className = 'border-b border-cyber-border/50 text-xs';
-                tr.innerHTML = `
-                    <td class="py-3 px-3 font-bold text-white">${usr.username}</td>
-                    <td class="py-3 px-3 uppercase text-amber-400 font-bold">${usr.role}</td>
-                    <td class="py-3 px-3 text-center">
-                        ${usr.username === 'qthangql' ? '<span class="text-gray-500 italic">Tối cao</span>' : `
-                            <select onchange="changeUserRole('${usr.username}', this.value)" class="bg-cyber-bg border border-cyber-border rounded px-2 py-1 text-white">
-                                <option value="member" ${usr.role==='member'?'selected':''}>Member</option>
-                                <option value="tester" ${usr.role==='tester'?'selected':''}>Tester</option>
-                                <option value="admin" ${usr.role==='admin'?'selected':''}>Admin</option>
+        // ROLE MANAGER (Admin phân quyền Tester)
+        function openRoleManagerModal() {
+            const container = document.getElementById('roleListContainer');
+            container.innerHTML = '';
+            usersList.forEach(u => {
+                container.innerHTML += `
+                    <div class="flex items-center justify-between bg-cyber-bg p-3 rounded-xl border border-cyber-border">
+                        <div>
+                            <span class="text-xs font-bold text-white">${u.username}</span>
+                            <span class="text-[10px] text-gray-400 ml-2 uppercase">(${u.role})</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <select onchange="changeUserRole('${u.username}', this.value)" class="bg-cyber-card border border-cyber-border text-xs text-white rounded-lg px-2 py-1">
+                                <option value="member" ${u.role==='member'?'selected':''}>Member</option>
+                                <option value="tester" ${u.role==='tester'?'selected':''}>Tester</option>
+                                <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
                             </select>
-                        `}
-                    </td>
+                        </div>
+                    </div>
                 `;
-                tbody.appendChild(tr);
             });
-            document.getElementById('adminModal').classList.remove('hidden');
+            document.getElementById('roleManagerModal').classList.remove('hidden');
         }
-
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.add('hidden');
-        }
-
-        function changeUserRole(uname, newRole) {
-            let u = users.find(x => x.username === uname);
+        function closeRoleManagerModal() { document.getElementById('roleManagerModal').classList.add('hidden'); }
+        function changeUserRole(username, newRole) {
+            const u = usersList.find(x => x.username === username);
             if(u) {
                 u.role = newRole;
-                localStorage.setItem('vc_users', JSON.stringify(users));
-                // Nếu đang đăng nhập chính tài khoản đó thì cập nhật lại
-                if(currentUser && currentUser.username === uname) {
-                    currentUser.role = newRole;
-                    localStorage.setItem('vc_current_user', JSON.stringify(currentUser));
-                    updateAuthUI();
+                localStorage.setItem('vctiers_users_db', JSON.stringify(usersList));
+                if(currentUser && currentUser.username === username) {
+                    currentUser = u;
+                    localStorage.setItem('vctiers_current_user', JSON.stringify(currentUser));
+                    updateUIAuth();
                 }
-                alert(`Đã đổi quyền của ${uname} thành ${newRole.toUpperCase()} thành công!`);
             }
         }
 
-        // --- RENDER BẢNG XẾP HẠNG & CHỨC NĂNG KHÁC ---
         function switchMode(mode) {
             currentMode = mode;
             document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.className = 'mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg hover:bg-white/10 text-gray-300 flex items-center gap-2 cursor-pointer font-subheading';
+                btn.className = "mode-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-cyber-bg text-gray-300 flex items-center gap-2 font-subheading cursor-pointer";
             });
             const activeBtn = document.getElementById(`btn-${mode}`);
-            if(activeBtn) {
-                activeBtn.className = 'mode-btn px-4 py-2.5 rounded-xl text-xs font-extrabold bg-amber-500 text-slate-950 flex items-center gap-2 cursor-pointer font-subheading shadow-lg shadow-amber-500/25';
-            }
+            if(activeBtn) activeBtn.className = "mode-btn px-4 py-2.5 rounded-xl text-xs font-black bg-amber-500 text-slate-950 flex items-center gap-2 font-subheading shadow-lg shadow-amber-500/25 cursor-pointer";
             renderTable();
+        }
+
+        function updateChampionCard(champ) {
+            if(!champ) return;
+            currentChampId = champ.id;
+            document.getElementById('champAvatar').src = `https://mc-heads.net/avatar/${champ.name}/96`;
+            document.getElementById('champName').innerText = champ.name;
+            document.getElementById('champTitle').innerHTML = `<i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>${champ.title}`;
+            document.getElementById('champPoints').innerText = `${champ.points} ĐIỂM`;
+            document.getElementById('champTiersList').innerHTML = champ.tiers.map(t => `<span class="badge-tier tier-${t.rank.toLowerCase()}">${t.mode}: ${t.rank}</span>`).join(' ');
         }
 
         function renderTable() {
@@ -610,49 +731,54 @@
             const searchVal = document.getElementById('searchInput').value.toLowerCase();
             container.innerHTML = '';
 
-            let sorted = [...players];
-            if(currentMode === 'overall') {
-                sorted.sort((a,b) => b.points - a.points);
-            } else {
-                const tierWeights = { 'HT1': 5, 'LT1': 4, 'HT2': 3, 'LT2': 2, 'HT3': 1 };
-                sorted.sort((a,b) => (tierWeights[b.tiers[currentMode]]||0) - (tierWeights[a.tiers[currentMode]]||0));
-            }
+            let filtered = players.filter(p => p.name.toLowerCase().includes(searchVal));
+            if (currentMode !== 'overall') filtered = filtered.filter(p => p.tiers.some(t => t.mode === currentMode));
 
-            let filtered = sorted.filter(p => p.name.toLowerCase().includes(searchVal));
+            filtered.forEach(p => {
+                let pts = 0;
+                p.tiers.forEach(t => { if(TIER_POINTS[t.rank]) pts += TIER_POINTS[t.rank]; });
+                p.points = pts;
+            });
+            filtered.sort((a, b) => b.points - a.points);
+            if(filtered.length > 0) updateChampionCard(filtered[0]);
 
-            if(filtered.length > 0) {
-                currentChampId = filtered[0].id;
-                updateChampionCard(filtered[0]);
-            }
+            filtered.forEach((player, index) => {
+                const rankNum = index + 1;
+                const rankClass = rankNum === 1 ? 'rank-num-1' : rankNum === 2 ? 'rank-num-2' : rankNum === 3 ? 'rank-num-3' : 'text-gray-500';
+                let displayTiers = currentMode !== 'overall' ? player.tiers.filter(t => t.mode === currentMode) : player.tiers;
 
-            filtered.forEach((p, index) => {
-                let card = document.createElement('div');
-                card.className = 'glass-panel rounded-2xl p-4 flex items-center justify-between gap-4 hover:border-amber-500/50 transition-all cursor-pointer';
-                card.onclick = () => openProfileModal(p.id);
+                let tiersPillsHTML = displayTiers.map(t => {
+                    const modeObj = MODE_ICONS[t.mode] || { icon: 'fa-solid fa-shield', color: 'text-gray-300' };
+                    let teammateBadge = (t.mode === '4vs4' && player.teammate4v4) ? `<span class="text-[9px] text-blue-300 ml-1 border-l border-white/20 pl-1"><i class="fa-solid fa-link text-[8px]"></i> ${player.teammate4v4}</span>` : '';
+                    return `<span class="badge-tier tier-${t.rank.toLowerCase()}"><i class="${modeObj.icon} ${modeObj.color}"></i> ${t.rank}${teammateBadge}</span>`;
+                }).join(' ');
 
-                let rankBadge = `<span class="rank-num ${index===0?'rank-num-1':index===1?'rank-num-2':index===2?'rank-num-3':'text-gray-400'}">#${index+1}</span>`;
+                const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.role === 'tester');
 
+                const card = document.createElement('div');
+                card.className = `glass-panel glass-card-interactive rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer`;
+                card.onclick = (e) => { if(!e.target.closest('button')) openProfileModal(player.id); };
                 card.innerHTML = `
                     <div class="flex items-center gap-4">
-                        <div class="w-12 text-center">${rankBadge}</div>
-                        <img src="https://mc-heads.net/avatar/${p.name}/48" class="w-12 h-12 rounded-xl bg-cyber-bg border border-cyber-border" alt="Avatar">
+                        <div class="rank-num ${rankClass} w-8 text-center">${rankNum}.</div>
+                        <img src="https://mc-heads.net/avatar/${player.name}/44" class="w-11 h-11 rounded-xl bg-cyber-bg border border-cyber-border shadow" alt="${player.name}">
                         <div>
-                            <div class="flex items-center gap-2">
-                                <h4 class="font-black text-white text-base font-subheading">${p.name}</h4>
-                                <span class="region-badge region-vn">${p.region}</span>
+                            <span class="font-extrabold text-white text-base font-subheading">${player.name}</span>
+                            <div class="text-xs text-gray-400 font-medium flex items-center gap-2">
+                                <span class="text-amber-400 font-bold"><i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>${player.title}</span> 
+                                <span class="text-gray-500">(${player.points} pts)</span>
                             </div>
-                            <p class="text-xs text-amber-400 font-bold">${p.title}</p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-6">
-                        <div class="hidden sm:flex items-center gap-2">
-                            <span class="badge-tier tier-ht1">1s: ${p.tiers['1vs1']}</span>
-                            <span class="badge-tier tier-lt1">2s: ${p.tiers['2vs2']}</span>
-                            <span class="badge-tier tier-ht2">3s: ${p.tiers['3vs3']}</span>
-                            <span class="badge-tier tier-lt2">4s: ${p.tiers['4vs4']}</span>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-sm font-black text-amber-400 font-subheading">${p.points} Điểm</span>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 border-t sm:border-t-0 border-cyber-border pt-2 sm:pt-0">
+                        <div class="flex items-center gap-1.5 flex-wrap">${tiersPillsHTML}</div>
+                        <div class="flex items-center gap-3">
+                            <span class="region-badge region-vn">${player.region}</span>
+                            ${canEdit ? `
+                            <div class="flex items-center gap-1 border-l border-cyber-border pl-2">
+                                <button type="button" onclick="openPlayerModal('${player.id}')" class="text-amber-400 text-xs p-1.5 rounded-lg bg-amber-500/10 cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
+                                ${currentUser.role === 'admin' ? `<button type="button" onclick="deletePlayer('${player.id}')" class="text-red-400 text-xs p-1.5 rounded-lg bg-red-500/10 cursor-pointer"><i class="fa-solid fa-trash"></i></button>` : ''}
+                            </div>` : ''}
                         </div>
                     </div>
                 `;
@@ -660,167 +786,140 @@
             });
         }
 
-        function updateChampionCard(champ) {
-            document.getElementById('champAvatar').src = `https://mc-heads.net/avatar/${champ.name}/96`;
-            document.getElementById('champName').innerText = champ.name;
-            document.getElementById('champTitle').innerHTML = `<i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>${champ.title}`;
-            document.getElementById('champPoints').innerText = `${champ.points} ĐIỂM`;
-            
-            const tiersList = document.getElementById('champTiersList');
-            tiersList.innerHTML = `
-                <span class="badge-tier tier-ht1">1vs1: ${champ.tiers['1vs1']}</span>
-                <span class="badge-tier tier-lt1">2vs2: ${champ.tiers['2vs2']}</span>
-                <span class="badge-tier tier-ht2">3vs3: ${champ.tiers['3vs3']}</span>
-                <span class="badge-tier tier-lt2">4vs4: ${champ.tiers['4vs4']}</span>
-            `;
-        }
-
-        // --- PROFILE MODAL ---
-        let currentProfilePlayerId = null;
-        let currentTeamTab = '1vs1';
-
         function openProfileModal(id) {
             const p = players.find(x => x.id === id);
             if(!p) return;
-            currentProfilePlayerId = id;
-
+            activeProfilePlayer = p;
             document.getElementById('profileBodySkin').src = `https://mc-heads.net/body/${p.name}/120`;
             document.getElementById('profileName').innerText = p.name;
             document.getElementById('profileTitle').innerHTML = `<i class="fa-solid fa-trophy text-[10px] mr-1 text-yellow-400"></i>${p.title}`;
+            document.getElementById('profileRegion').innerText = p.region;
             document.getElementById('profilePoints').innerText = `${p.points} ĐIỂM`;
 
-            const tGrid = document.getElementById('profileTiersGrid');
-            tGrid.innerHTML = `
-                <div class="bg-cyber-bg p-2.5 rounded-xl border border-cyber-border flex justify-between items-center"><span class="text-xs text-gray-400 font-bold">1vs1</span><span class="badge-tier tier-ht1">${p.tiers['1vs1']}</span></div>
-                <div class="bg-cyber-bg p-2.5 rounded-xl border border-cyber-border flex justify-between items-center"><span class="text-xs text-gray-400 font-bold">2vs2</span><span class="badge-tier tier-lt1">${p.tiers['2vs2']}</span></div>
-                <div class="bg-cyber-bg p-2.5 rounded-xl border border-cyber-border flex justify-between items-center"><span class="text-xs text-gray-400 font-bold">3vs3</span><span class="badge-tier tier-ht2">${p.tiers['3vs3']}</span></div>
-                <div class="bg-cyber-bg p-2.5 rounded-xl border border-cyber-border flex justify-between items-center"><span class="text-xs text-gray-400 font-bold">4vs4</span><span class="badge-tier tier-lt2">${p.tiers['4vs4']}</span></div>
-            `;
-
+            const gridContainer = document.getElementById('profileTiersGrid');
+            gridContainer.innerHTML = '';
+            ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => {
+                const found = p.tiers.find(t => t.mode === m);
+                gridContainer.innerHTML += `
+                    <div class="bg-cyber-bg border border-cyber-border p-2.5 rounded-xl flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-400">${m}:</span>
+                        <span class="badge-tier ${found ? 'tier-' + found.rank.toLowerCase() : 'bg-cyber-bg text-gray-500'}">${found ? found.rank : 'Chưa có'}</span>
+                    </div>`;
+            });
             switchTeamTab('1vs1');
             document.getElementById('profileModal').classList.remove('hidden');
         }
 
-        function closeProfileModal() {
-            document.getElementById('profileModal').classList.add('hidden');
+        function switchTeamTab(mode) {
+            activeTeamTab = mode;
+            document.querySelectorAll('.team-tab-btn').forEach(btn => btn.classList.remove('active'));
+            const activeTab = document.getElementById(`tab-team-${mode}`);
+            if(activeTab) activeTab.classList.add('active');
+            renderProfileTeam();
         }
 
-        function switchTeamTab(tab) {
-            currentTeamTab = tab;
-            ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(t => {
-                const btn = document.getElementById(`tab-team-${t}`);
-                if(btn) btn.className = 'team-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-gray-300 font-subheading flex items-center gap-1.5 cursor-pointer';
+        function renderProfileTeam() {
+            if(!activeProfilePlayer) return;
+            const teamGrid = document.getElementById('profileTeamGrid');
+            teamGrid.innerHTML = '';
+            const currentTeamList = (activeProfilePlayer.teams || {})[activeTeamTab] || [];
+            currentTeamList.forEach(poke => {
+                if(poke && poke.trim()) {
+                    teamGrid.innerHTML += `
+                        <div class="bg-cyber-bg/90 border border-cyber-border p-3 rounded-2xl flex flex-col items-center text-center">
+                            <img src="${getPokemonSpriteUrl(poke)}" class="w-14 h-14 object-contain mb-1" onerror="this.src='https://play.pokemonshowdown.com/sprites/gen5/substitute.png'">
+                            <span class="text-xs font-extrabold text-white capitalize truncate w-full">${poke}</span>
+                        </div>`;
+                }
             });
-            const activeBtn = document.getElementById(`tab-team-${tab}`);
-            if(activeBtn) activeBtn.className = 'team-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-amber-400 font-subheading flex items-center gap-1.5 active cursor-pointer';
-
-            const p = players.find(x => x.id === currentProfilePlayerId);
-            const grid = document.getElementById('profileTeamGrid');
-            grid.innerHTML = '';
-            if(p && p.team && p.team[tab]) {
-                p.team[tab].forEach(poke => {
-                    let div = document.createElement('div');
-                    div.className = 'bg-cyber-bg border border-cyber-border rounded-2xl p-3 text-center flex flex-col items-center justify-center gap-2';
-                    div.innerHTML = `
-                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-lg font-black"><i class="fa-solid fa-shield-cat"></i></div>
-                        <span class="text-xs font-bold text-white font-subheading">${poke}</span>
-                    `;
-                    grid.appendChild(div);
-                });
-            }
         }
 
-        // --- THÊM PLAYER MỚI ---
-        function openPlayerModal() {
-            if(!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'tester')) {
-                alert('Bạn không có quyền thực hiện thao tác này!');
-                return;
+        function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); }
+
+        function openPlayerModal(playerId = null) {
+            document.getElementById('editingPlayerId').value = playerId || '';
+            if (playerId) {
+                const p = players.find(x => x.id === playerId);
+                if (p) {
+                    document.getElementById('playerFormName').value = p.name;
+                    document.getElementById('playerFormRegion').value = p.region;
+                    document.getElementById('playerFormTeammate4v4').value = p.teammate4v4 || '';
+                    p.tiers.forEach(t => {
+                        const sel = document.getElementById(`tier_${t.mode}`);
+                        if(sel) sel.value = t.rank;
+                    });
+                    ['1v1', '2v2', '3v3', '4v4'].forEach(mKey => {
+                        const modeFull = mKey === '1v1' ? '1vs1' : mKey === '2v2' ? '2vs2' : mKey === '3v3' ? '3vs3' : '4vs4';
+                        const list = (p.teams || {})[modeFull] || [];
+                        for(let i=0; i<6; i++) document.getElementById(`poke_${mKey}_${i}`).value = list[i] || '';
+                    });
+                    calculateAutoPointsAndRank();
+                }
+            } else {
+                document.getElementById('playerFormName').value = '';
+                document.getElementById('playerFormTeammate4v4').value = '';
+                ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => { document.getElementById(`tier_${m}`).value = ""; });
+                ['1v1', '2v2', '3v3', '4vs4'].forEach(mKey => { for(let i=0; i<6; i++) document.getElementById(`poke_${mKey}_${i}`).value = ''; });
+                calculateAutoPointsAndRank();
             }
-            document.getElementById('inputPlayerName').value = '';
-            document.getElementById('inputPlayerTitle').value = '';
             document.getElementById('playerModal').classList.remove('hidden');
         }
 
-        function closePlayerModal() {
-            document.getElementById('playerModal').classList.add('hidden');
-        }
+        function closePlayerModal() { document.getElementById('playerModal').classList.add('hidden'); }
 
         function savePlayer() {
-            const name = document.getElementById('inputPlayerName').value.trim();
-            const title = document.getElementById('inputPlayerTitle').value.trim();
-            if(!name) { alert('Vui lòng nhập tên tuyển thủ!'); return; }
+            const id = document.getElementById('editingPlayerId').value;
+            const name = document.getElementById('playerFormName').value.trim();
+            if (!name) { alert("Vui lòng nhập tên Ingame Minecraft!"); return; }
 
-            const newP = {
-                id: players.length + 1,
-                name: name,
-                title: title || 'Cobblemon Fighter',
-                region: 'VN',
-                points: 100,
-                tiers: {
-                    '1vs1': document.getElementById('inputTier1v1').value,
-                    '2vs2': document.getElementById('inputTier2v2').value,
-                    '3vs3': document.getElementById('inputTier3v3').value,
-                    '4vs4': document.getElementById('inputTier4v4').value
-                },
-                team: {
-                    '1vs1': ['Pikachu', 'Charizard', 'Lucario', 'Garchomp', 'Snorlax', 'Mewtwo'],
-                    '2vs2': ['Pikachu', 'Charizard', 'Lucario', 'Garchomp', 'Snorlax', 'Mewtwo'],
-                    '3vs3': ['Pikachu', 'Charizard', 'Lucario', 'Garchomp', 'Snorlax', 'Mewtwo'],
-                    '4vs4': ['Pikachu', 'Charizard', 'Lucario', 'Garchomp', 'Snorlax', 'Mewtwo']
+            const title = document.getElementById('playerFormTitle').value;
+            const teammate4v4 = document.getElementById('playerFormTeammate4v4').value.trim();
+            const teams = {};
+            ['1v1', '2v2', '3v3', '4v4'].forEach(mKey => {
+                const modeFull = mKey === '1v1' ? '1vs1' : mKey === '2v2' ? '2vs2' : mKey === '3v3' ? '3vs3' : '4vs4';
+                const pList = [];
+                for(let i=0; i<6; i++) {
+                    const val = document.getElementById(`poke_${mKey}_${i}`).value.trim();
+                    if(val) pList.push(val);
                 }
-            };
+                teams[modeFull] = pList;
+            });
 
-            players.push(newP);
-            localStorage.setItem('vc_players', JSON.stringify(players));
+            const tiers = [];
+            ['1vs1', '2vs2', '3vs3', '4vs4'].forEach(m => {
+                const val = document.getElementById(`tier_${m}`).value;
+                if(val) tiers.push({ mode: m, rank: val });
+            });
+
+            let points = 0;
+            tiers.forEach(t => { if(TIER_POINTS[t.rank]) points += TIER_POINTS[t.rank]; });
+
+            if (id) {
+                const p = players.find(x => x.id === id);
+                if (p) { p.name = name; p.title = title; p.teams = teams; p.tiers = tiers; p.points = points; p.teammate4v4 = teammate4v4; }
+            } else {
+                players.push({ id: Date.now().toString(), name, title, region: 'VN', points, tiers, teams, teammate4v4 });
+            }
+
+            saveToLocalStorage();
             closePlayerModal();
             renderTable();
-            alert('Thêm tuyển thủ mới thành công!');
         }
 
-        // --- TESTING FLOW STEPS ---
-        const stepsData = [
-            { title: "Bước 1: Đăng ký tài khoản", desc: "Người chơi truy cập trang web, bấm nút Đăng Ký và tạo tài khoản cá nhân cho mình với vai trò Member thông thường." },
-            { title: "Bước 2: Liên hệ Admin cấp quyền", desc: "Admin đăng nhập bằng tài khoản <b>qthangql</b> (Mật khẩu: <code>Dung12345D</code>) vào Quản Trị User để nâng cấp tài khoản của bạn lên <b>Tester</b>." },
-            { title: "Bước 3: Thêm & Quản lý Player", desc: "Sau khi có quyền Tester, các nút chức năng quản trị sẽ mở khóa giúp bạn thêm tuyển thủ, cập nhật bậc Tier và điểm số trực tiếp." },
-            { title: "Bước 4: Đồng bộ & Lưu trữ", desc: "Hệ thống tự động lưu trữ thông tin an toàn trên trình duyệt người dùng qua LocalStorage, đảm bảo mượt mà và không mất dữ liệu." }
-        ];
-        let currentStepIdx = 0;
-
-        function renderFlowStep() {
-            const content = document.getElementById('flowStepContent');
-            const count = document.getElementById('flowStepCount');
-            const st = stepsData[currentStepIdx];
-            count.innerText = `${currentStepIdx + 1}/4`;
-            content.innerHTML = `
-                <h4 class="text-base font-black text-amber-400 font-subheading">${st.title}</h4>
-                <p class="text-xs text-gray-300 leading-relaxed">${st.desc}</p>
-            `;
+        function deletePlayer(id) {
+            if (confirm("Xóa tuyển thủ này?")) {
+                players = players.filter(p => p.id !== id);
+                saveToLocalStorage();
+                renderTable();
+            }
         }
 
-        function nextStep() {
-            currentStepIdx = (currentStepIdx + 1) % stepsData.length;
-            renderFlowStep();
-        }
+        function copyIP() { navigator.clipboard.writeText("vuamc.net"); alert("Đã copy IP: vuamc.net"); }
 
-        function prevStep() {
-            currentStepIdx = (currentStepIdx - 1 + stepsData.length) % stepsData.length;
-            renderFlowStep();
-        }
-
-        function copyIP() {
-            navigator.clipboard.writeText('vuamc.net');
-            alert('Đã copy IP server: vuamc.net');
-        }
-
-        // Khởi chạy khi tải trang
-        window.onload = function() {
-            updateAuthUI();
-            renderTable();
-            renderFlowStep();
-            setTimeout(() => {
-                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-            }, 100);
-        };
+        populateTierSelects();
+        updateUIAuth();
+        renderFlowStep();
+        renderTable();
     </script>
 </body>
 </html>
