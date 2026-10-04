@@ -71,7 +71,6 @@
             text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.5px;
             border-width: 1px; border-style: solid;
         }
-        /* Phân màu viền và nền riêng biệt cho từng Tier */
         .tier-ht1 { background: rgba(239, 68, 68, 0.18); color: #f87171; border-color: rgba(239, 68, 68, 0.6); }
         .tier-lt1 { background: rgba(249, 115, 22, 0.18); color: #fb923c; border-color: rgba(249, 115, 22, 0.6); }
         .tier-ht2 { background: rgba(234, 179, 8, 0.18); color: #facc15; border-color: rgba(234, 179, 8, 0.6); }
@@ -150,7 +149,7 @@
                     HỆ THỐNG XẾP HẠNG <br><span class="text-glow-orange">VC TIERS</span> VUAMC.NET
                 </h1>
                 <p class="text-sm md:text-base text-gray-400 max-w-xl leading-relaxed">
-                    Đấu trường đánh giá năng lực Cobblemon PvP chuẩn xác, minh bạch dành riêng cho cộng đồng người chơi tại <span class="text-amber-400 font-bold font-subheading">vuamc.net</span>[cite: 7]. Khẳng định trình độ và chinh phục đỉnh cao!
+                    Đấu trường đánh giá năng lực Cobblemon PvP chuẩn xác, minh bạch dành riêng cho cộng đồng người chơi tại <span class="text-amber-400 font-bold font-subheading">vuamc.net</span>. Khẳng định trình độ và chinh phục đỉnh cao!
                 </p>
                 <div class="flex flex-wrap items-center gap-3 pt-2">
                     <a href="#rankings" class="btn-orange-glow px-6 py-3.5 rounded-xl text-slate-950 font-black text-xs flex items-center gap-2 font-subheading uppercase">
@@ -581,8 +580,8 @@
             }
         ];
 
-        let players = JSON.parse(localStorage.getItem('vctiers_players_v22')) || defaultPlayers;
-        function saveToLocalStorage() { localStorage.setItem('vctiers_players_v22', JSON.stringify(players)); }
+        let players = JSON.parse(localStorage.getItem('vctiers_players_v23')) || defaultPlayers;
+        function saveToLocalStorage() { localStorage.setItem('vctiers_players_v23', JSON.stringify(players)); }
 
         function openAuthModal(tab) {
             switchAuthTab(tab);
@@ -657,16 +656,13 @@
                     </div>
                 `;
 
-                // Kiểm tra phân quyền: Member không được thấy nút Thêm/Sửa/Xóa Player
                 if (currentUser.role === 'member') {
                     adminControls.classList.add('hidden');
                 } else {
                     adminControls.classList.remove('hidden');
-                    // Chỉ hiển thị nút Thêm Player cho Admin hoặc Tester
                     addPlayerBtn.classList.remove('hidden');
                 }
 
-                // Chỉ Admin mới thấy nút phân quyền hệ thống
                 manageRolesBtn.classList.toggle('hidden', currentUser.role !== 'admin');
             } else {
                 area.innerHTML = `
@@ -762,7 +758,6 @@
                     return `<span class="badge-tier tier-${t.rank.toLowerCase()}"><i class="${modeObj.icon} ${modeObj.color}"></i> ${t.rank}${teammateBadge}</span>`;
                 }).join(' ');
 
-                // Chỉ hiển thị nút chỉnh sửa/xóa nếu là Admin hoặc Tester
                 let actionButtonsHTML = '';
                 if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'tester')) {
                     actionButtonsHTML = `
@@ -851,7 +846,6 @@
         function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); }
 
         function openPlayerModal(playerId = null) {
-            // Kiểm tra bảo mật tầng giao diện: Nếu chưa đăng nhập hoặc là member thì không cho mở modal thao tác
             if (!currentUser || currentUser.role === 'member') {
                 alert("Bạn không có quyền thực hiện thao tác này! Chỉ Tester hoặc Admin mới được cấp phép.");
                 return;
